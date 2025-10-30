@@ -3,6 +3,7 @@ import { useAnimations } from './AnimationContext';
 import NameEditor from './NameEditor';
 import ScoreButtons from './ScoreButtons';
 import StatControl from './StatControl';
+import { SquareX } from 'lucide-react';
 
 const TeamControls = ({ team }) => {
   const { matchState, updateCards, updateStats } = useMatch();
@@ -28,7 +29,7 @@ const TeamControls = ({ team }) => {
         <StatControl
           label="Yellow Cards"
           value={teamData.yellowCards}
-          icon="📒"
+          icon={<SquareX className="w-4 h-4 text-yellow-400" />}
           onIncrement={() => updateCards(team, 'yellowCards', 1)}
           onDecrement={() => updateCards(team, 'yellowCards', -1)}
         />
@@ -36,7 +37,7 @@ const TeamControls = ({ team }) => {
         <StatControl
           label="Red Cards"
           value={teamData.redCards}
-          icon="📕"
+          icon={<SquareX className="w-4 h-4 text-broadcastRed" />}
           onIncrement={handleRedCardIncrement}
           onDecrement={() => updateCards(team, 'redCards', -1)}
         />
@@ -46,6 +47,8 @@ const TeamControls = ({ team }) => {
           value={teamData.fouls}
           onIncrement={() => updateStats(team, 'fouls', 1)}
           onDecrement={() => updateStats(team, 'fouls', -1)}
+          incrementKey={team === 'teamA' ? 'A' : 'L'}
+          decrementKey={team === 'teamA' ? 'S' : ';'}
         />
 
         <StatControl

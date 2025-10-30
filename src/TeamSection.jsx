@@ -28,13 +28,13 @@ const TeamSection = ({ team, side, teamData }) => {
       className={`flex flex-col items-center relative ${isRedCardEffect ? 'red-card-shake' : ''}`}
     >
       <div
-        className={`font-heading text-4xl md:text-6xl lg:text-team uppercase tracking-wider mb-4 md:mb-6 text-center min-h-[3rem] md:min-h-[4.5rem] lg:min-h-[6rem] flex items-center justify-center`}
+        className={`font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-team uppercase tracking-wider mb-3 md:mb-4 lg:mb-5 xl:mb-6 text-center min-h-[2.5rem] md:min-h-[3.5rem] lg:min-h-[4.5rem] xl:min-h-[5.5rem] 2xl:min-h-[6rem] flex items-center justify-center px-2`}
         style={{ color: teamColor }}
       >
         {teamData.name}
       </div>
       <div
-        className={`font-display text-8xl md:text-9xl lg:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
+        className={`font-display text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
         style={scoreStyle}
       >
         {teamData.score}

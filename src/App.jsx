@@ -4,6 +4,8 @@ import { AnimationProvider } from './AnimationContext';
 import { useKeyboardShortcuts } from './useKeyboardShortcuts';
 import ScoreboardDisplay from './ScoreboardDisplay';
 import ControlPanel from './ControlPanel';
+import NextMatchModal from './NextMatchModal';
+import { Monitor } from 'lucide-react';
 
 function AppContent() {
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
@@ -21,14 +23,15 @@ function AppContent() {
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
       <ScoreboardDisplay presentationMode={presentationMode} />
 
-      {!presentationMode && <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} />}
+      {!presentationMode && <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />}
 
       {/* Projector Mode Indicator - visible on hover */}
       {presentationMode && (
         <div className="fixed bottom-4 right-4 z-50 group">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-electricMint/20 backdrop-blur-sm border-2 border-electricMint px-4 py-2 rounded-lg">
-            <p className="font-body text-electricMint text-sm font-semibold">
-              📽️ Projector Mode (Press <kbd className="px-2 py-1 bg-electricMint/30 rounded">Tab</kbd> to toggle controls)
+            <p className="font-body text-electricMint text-sm font-semibold flex items-center gap-2">
+              <Monitor className="w-4 h-4" />
+              Projector Mode (Press <kbd className="px-2 py-1 bg-electricMint/30 rounded">Tab</kbd> to toggle controls)
             </p>
           </div>
           {/* Hover trigger area */}
@@ -71,6 +74,12 @@ function AppContent() {
           </div>
         </div>
       )}
+
+      {/* Next Match Modal - always accessible even in Projector Mode */}
+      <NextMatchModal
+        isOpen={showNextMatchModal}
+        onClose={() => setShowNextMatchModal(false)}
+      />
     </div>
   );
 }

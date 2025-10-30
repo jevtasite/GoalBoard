@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { useMatch } from './MatchContext';
 import PeriodSelector from './PeriodSelector';
-import NextMatchModal from './NextMatchModal';
+import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw } from 'lucide-react';
 
-const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal }) => {
+const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal }) => {
   const { matchState, toggleTimer, zoomLevel, setZoomLevel } = useMatch();
-  const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const { timer } = matchState;
 
   const handleResetTimer = () => {
@@ -39,10 +37,20 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
       <div className="flex gap-3">
         <button
           onClick={toggleTimer}
-          className="relative flex-1 px-4 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+          className="relative flex-1 px-4 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg flex items-center justify-center gap-2"
           title="Start/Pause timer (Space)"
         >
-          {timer.isRunning ? '⏸ Pause' : '▶ Start'}
+          {timer.isRunning ? (
+            <>
+              <Pause className="w-4 h-4" />
+              Pause
+            </>
+          ) : (
+            <>
+              <Play className="w-4 h-4" />
+              Start
+            </>
+          )}
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded text-white">
             Space
           </span>
@@ -50,10 +58,11 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
         <button
           onClick={handleResetTimer}
-          className="relative px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+          className="relative px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press flex items-center justify-center gap-2"
           title="Reset timer (R)"
         >
-          ⟲ Reset
+          <RotateCcw className="w-4 h-4" />
+          Reset
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             R
           </span>
@@ -89,10 +98,11 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
       <button
         onClick={() => setShowNextMatchModal(true)}
-        className="relative w-full px-4 py-3 bg-goalGreen hover:bg-goalGreen/80 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg mt-2"
+        className="relative w-full px-4 py-3 bg-goalGreen hover:bg-goalGreen/80 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg mt-2 flex items-center justify-center gap-2"
         title="Next match (N)"
       >
-        🔄 Next Match
+        <RefreshCw className="w-4 h-4" />
+        Next Match
         <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
           N
         </span>
@@ -101,10 +111,11 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
       <div className="flex gap-3">
         <button
           onClick={toggleFullscreen}
-          className="relative flex-1 px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+          className="relative flex-1 px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press flex items-center justify-center gap-2"
           title="Toggle fullscreen (F)"
         >
-          ⛶ Fullscreen
+          <Maximize className="w-4 h-4" />
+          Fullscreen
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             F
           </span>
@@ -112,20 +123,16 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
         <button
           onClick={() => setPresentationMode(true)}
-          className="relative flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+          className="relative flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg flex items-center justify-center gap-2"
           title="Projector mode (Tab)"
         >
-          📽️ Projector
+          <Monitor className="w-4 h-4" />
+          Projector
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             Tab
           </span>
         </button>
       </div>
-
-      <NextMatchModal
-        isOpen={showNextMatchModal}
-        onClose={() => setShowNextMatchModal(false)}
-      />
     </div>
   );
 };

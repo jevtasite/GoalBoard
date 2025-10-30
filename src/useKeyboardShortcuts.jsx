@@ -61,24 +61,6 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
           }
           break;
 
-        // Team A Cards
-        case 'y':
-          updateCards('teamA', 'yellowCards', 1);
-          break;
-        case 'u':
-          updateCards('teamA', 'redCards', 1);
-          triggerRedCard('teamA');
-          break;
-
-        // Team B Cards
-        case 'i':
-          updateCards('teamB', 'yellowCards', 1);
-          break;
-        case 'k':
-          updateCards('teamB', 'redCards', 1);
-          triggerRedCard('teamB');
-          break;
-
         // Team A Fouls
         case 'a':
           updateStats('teamA', 'fouls', 1);
@@ -91,7 +73,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
         case 'l':
           updateStats('teamB', 'fouls', 1);
           break;
-        case ',':
+        case ';':
           updateStats('teamB', 'fouls', -1);
           break;
 

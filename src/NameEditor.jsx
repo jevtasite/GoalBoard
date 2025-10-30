@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMatch } from './MatchContext';
+import { Pencil } from 'lucide-react';
 
 const NameEditor = ({ team, currentName }) => {
   const [editing, setEditing] = useState(false);
@@ -42,7 +43,8 @@ const NameEditor = ({ team, currentName }) => {
       onClick={() => setEditing(true)}
       className="w-full px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body rounded-lg transition-all button-press flex items-center justify-center gap-2"
     >
-      ✏️ Edit Name
+      <Pencil className="w-4 h-4" />
+      Edit Name
     </button>
   );
 };

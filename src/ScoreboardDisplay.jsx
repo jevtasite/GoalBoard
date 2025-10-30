@@ -11,21 +11,22 @@ const ScoreboardDisplay = ({ presentationMode = false }) => {
 
   const heightClass = presentationMode
     ? 'h-screen'
-    : 'h-[50vh] md:h-[60vh] lg:h-[65vh]';
+    : 'h-[50vh] md:h-[55vh] lg:h-[60vh] xl:h-[65vh]';
 
   return (
-    <div className={`${heightClass} gradient-background relative flex items-center justify-center px-6 md:px-12 lg:px-xl transition-all duration-300`}>
+    <div className={`${heightClass} gradient-background relative flex items-center justify-center px-6 md:px-8 lg:px-10 xl:px-12 transition-all duration-300 overflow-hidden`}>
       <ScanLineOverlay />
       <ScoreboardBars active={animations.goalCelebration.active} team={animations.goalCelebration.team} />
 
       <div
-        className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 z-30 w-full px-4"
+        className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 z-30 w-full"
         style={{
           transform: `scale(${zoomLevel / 100})`,
+          transformOrigin: 'center center',
           transition: 'transform 0.2s ease-out'
         }}
       >
-        <div className="w-full md:w-80 lg:w-96 flex-shrink-0">
+        <div className="w-full md:w-72 lg:w-80 xl:w-96 2xl:w-[28rem] flex-shrink-0">
           <TeamSection
             team="teamA"
             side="left"
@@ -33,11 +34,11 @@ const ScoreboardDisplay = ({ presentationMode = false }) => {
           />
         </div>
 
-        <div className="w-full md:w-auto flex-shrink-0">
+        <div className="w-full md:w-auto md:min-w-[16rem] lg:min-w-[20rem] xl:min-w-[24rem] flex-shrink-0">
           <CenterDisplay />
         </div>
 
-        <div className="w-full md:w-80 lg:w-96 flex-shrink-0">
+        <div className="w-full md:w-72 lg:w-80 xl:w-96 2xl:w-[28rem] flex-shrink-0">
           <TeamSection
             team="teamB"
             side="right"
