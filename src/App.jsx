@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { MatchProvider, useMatch } from './MatchContext';
 import { AnimationProvider } from './AnimationContext';
 import { TranslationProvider, useTranslation } from './TranslationContext';
+import { ThemeProvider } from './ThemeContext';
 import { useKeyboardShortcuts } from './useKeyboardShortcuts';
 import { useDeviceDetection } from './useDeviceDetection';
 import ScoreboardDisplay from './ScoreboardDisplay';
 import ControlPanel from './ControlPanel';
 import NextMatchModal from './NextMatchModal';
 import LanguageSelector from './LanguageSelector';
+import ThemeSelector from './ThemeSelector';
 import DeveloperCredit from './DeveloperCredit';
 import { Monitor } from 'lucide-react';
 
@@ -32,6 +34,11 @@ function AppContent() {
       {/* Language Selector for mobile devices */}
       {isMobileDevice && !presentationMode && (
         <LanguageSelector isMobile={true} />
+      )}
+
+      {/* Theme Selector for mobile devices */}
+      {isMobileDevice && !presentationMode && (
+        <ThemeSelector isMobile={true} />
       )}
 
       {/* Developer Credit */}
@@ -105,13 +112,15 @@ function AppContent() {
 
 function App() {
   return (
-    <TranslationProvider>
-      <MatchProvider>
-        <AnimationProvider>
-          <AppContent />
-        </AnimationProvider>
-      </MatchProvider>
-    </TranslationProvider>
+    <ThemeProvider>
+      <TranslationProvider>
+        <MatchProvider>
+          <AnimationProvider>
+            <AppContent />
+          </AnimationProvider>
+        </MatchProvider>
+      </TranslationProvider>
+    </ThemeProvider>
   );
 }
 

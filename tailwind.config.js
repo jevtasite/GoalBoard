@@ -7,14 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        broadcastNavy: '#0A1628',
-        electricMint: '#00FF87',
-        steelBlue: '#1E3A5F',
-        broadcastRed: '#FF2D55',
-        slateGray: '#8E99AB',
+        broadcastNavy: 'var(--color-background, #0A1628)',
+        electricMint: 'var(--color-primary, #00FF87)',
+        steelBlue: 'var(--color-steel, #1E3A5F)',
+        broadcastRed: 'var(--color-secondary, #FF2D55)',
+        slateGray: 'var(--color-slate, #8E99AB)',
         goalGreen: '#34C759',
-        teamA: '#00FF87',           // Electric Mint - cyan/green
-        teamB: '#FF8C00',           // Broadcast Orange - warm contrast
+        teamA: 'var(--color-team-a, #00FF87)',
+        teamB: 'var(--color-team-b, #FF2D55)',
       },
       fontFamily: {
         display: ['Rajdhani', 'sans-serif'],

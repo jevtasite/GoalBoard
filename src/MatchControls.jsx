@@ -2,6 +2,7 @@ import { useMatch } from './MatchContext';
 import { useTranslation } from './TranslationContext';
 import PeriodSelector from './PeriodSelector';
 import LanguageSelector from './LanguageSelector';
+import ThemeSelector from './ThemeSelector';
 import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw } from 'lucide-react';
 
 const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal }) => {
@@ -29,7 +30,8 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
   return (
     <div className="bg-steelBlue/30 rounded-xl p-4 md:p-6 flex flex-col gap-4">
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-2 gap-2">
+        <ThemeSelector />
         <h3 className="font-heading text-2xl text-electricMint uppercase tracking-wider flex-1 text-center">
           {t('matchControls')}
         </h3>
