@@ -9,7 +9,8 @@ const LanguageSelector = ({ isMobile = false }) => {
 
   const languages = [
     { code: 'en', name: 'English', flagCode: 'gb' },
-    { code: 'sr', name: 'Srpski', flagCode: 'rs' }
+    { code: 'sr', name: 'Srpski', flagCode: 'rs' },
+    { code: 'es', name: 'Español', flagCode: 'es' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);

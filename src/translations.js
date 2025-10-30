@@ -108,4 +108,58 @@ export const translations = {
     toToggleControls: "da uključite/isključite kontrole)",
     controls: "Kontrole",
   },
+
+  es: {
+    // Team names
+    teamA: "Equipo A",
+    teamB: "Equipo B",
+
+    // Match controls
+    matchControls: "Controles del Partido",
+    start: "Iniciar",
+    pause: "Pausa",
+    reset: "Reiniciar",
+    nextMatch: "Próximo Partido",
+    fullscreen: "Pantalla Completa",
+    projector: "Proyector",
+
+    // Period names
+    preMatch: "Pre-Partido",
+    firstHalf: "Primer Tiempo",
+    halfTime: "Medio Tiempo",
+    secondHalf: "Segundo Tiempo",
+    fullTime: "Tiempo Completo",
+    extraTime: "Tiempo Extra",
+    penalties: "Penales",
+
+    // Stats
+    yellowCards: "Tarjetas Amarillas",
+    redCards: "Tarjetas Rojas",
+    fouls: "Faltas",
+    corners: "Córners",
+
+    // Actions
+    editName: "Editar Nombre",
+    cancel: "Cancelar",
+    save: "Guardar",
+
+    // Modals
+    resetTimerTitle: "¿Reiniciar Cronómetro?",
+    resetTimerMessage: "¿Estás seguro de que quieres reiniciar el cronómetro a 00:00?",
+    startNextMatchTitle: "Iniciar Próximo Partido",
+    startNextMatchMessage: "Esto reiniciará los puntajes, el cronómetro y todas las estadísticas.",
+    keepTeamNames: "Mantener los nombres actuales de los equipos",
+    startNewMatch: "Iniciar Nuevo Partido",
+
+    // Placeholders
+    teamANamePlaceholder: "Nombre del Equipo A",
+    teamBNamePlaceholder: "Nombre del Equipo B",
+
+    // Other
+    vs: "VS",
+    scoreboardSize: "Tamaño del Marcador",
+    projectorMode: "Modo Proyector (Presiona",
+    toToggleControls: "para alternar controles)",
+    controls: "Controles",
+  },
 };
