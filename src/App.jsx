@@ -8,6 +8,7 @@ import ScoreboardDisplay from './ScoreboardDisplay';
 import ControlPanel from './ControlPanel';
 import NextMatchModal from './NextMatchModal';
 import LanguageSelector from './LanguageSelector';
+import DeveloperCredit from './DeveloperCredit';
 import { Monitor } from 'lucide-react';
 
 function AppContent() {
@@ -31,6 +32,11 @@ function AppContent() {
       {/* Language Selector for mobile devices */}
       {isMobileDevice && !presentationMode && (
         <LanguageSelector isMobile={true} />
+      )}
+
+      {/* Developer Credit */}
+      {!presentationMode && (
+        <DeveloperCredit />
       )}
 
       {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
