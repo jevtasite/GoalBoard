@@ -36,7 +36,7 @@ function AppContent() {
 
       {/* Developer Credit */}
       {!presentationMode && (
-        <DeveloperCredit />
+        <DeveloperCredit isMobileDevice={isMobileDevice} />
       )}
 
       {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
