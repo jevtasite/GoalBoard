@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from './TranslationContext';
-import { Languages, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const LanguageSelector = ({ isMobile = false }) => {
   const { language, setLanguage } = useTranslation();
@@ -8,8 +8,8 @@ const LanguageSelector = ({ isMobile = false }) => {
   const dropdownRef = useRef(null);
 
   const languages = [
-    { code: 'en', name: 'English', flag: 'EN' },
-    { code: 'sr', name: 'Srpski', flag: 'SR' }
+    { code: 'en', name: 'English', flagCode: 'gb' },
+    { code: 'sr', name: 'Srpski', flagCode: 'rs' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);
@@ -37,8 +37,7 @@ const LanguageSelector = ({ isMobile = false }) => {
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-2 px-4 py-2 bg-steelBlue/90 hover:bg-steelBlue text-white font-body font-semibold rounded-lg transition-all shadow-lg backdrop-blur-sm border border-electricMint/30"
         >
-          <Languages className="w-5 h-5" />
-          <span>{currentLanguage.flag}</span>
+          <span className={`fi fi-${currentLanguage.flagCode} text-lg`}></span>
           <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
@@ -54,7 +53,7 @@ const LanguageSelector = ({ isMobile = false }) => {
                     : 'text-white hover:bg-steelBlue/80'
                 }`}
               >
-                <span className="font-bold text-sm">{lang.flag}</span>
+                <span className={`fi fi-${lang.flagCode} text-lg`}></span>
                 <span>{lang.name}</span>
               </button>
             ))}
@@ -70,8 +69,7 @@ const LanguageSelector = ({ isMobile = false }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
       >
-        <Languages className="w-4 h-4" />
-        <span>{currentLanguage.flag}</span>
+        <span className={`fi fi-${currentLanguage.flagCode} text-lg`}></span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -87,7 +85,7 @@ const LanguageSelector = ({ isMobile = false }) => {
                   : 'text-white hover:bg-steelBlue/80'
               }`}
             >
-              <span className="font-bold text-sm">{lang.flag}</span>
+              <span className={`fi fi-${lang.flagCode} text-lg`}></span>
               <span>{lang.name}</span>
             </button>
           ))}
