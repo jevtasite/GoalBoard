@@ -1,8 +1,15 @@
+import { useState } from 'react';
 import { useAnimations } from './AnimationContext';
+import { useMatch } from './MatchContext';
 import CardIndicators from './CardIndicators';
+import { Pencil, Check, X } from 'lucide-react';
 
-const TeamSection = ({ team, side, teamData }) => {
+const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = false }) => {
   const { animations } = useAnimations();
+  const { updateScore, updateTeamName } = useMatch();
+  const { triggerGoalCelebration, triggerScoreChange } = useAnimations();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [tempName, setTempName] = useState(teamData.name);
 
   const isScoreAnimating = animations.scoreChange.active && animations.scoreChange.team === team;
   const isRedCardEffect = animations.redCardEffect.active && animations.redCardEffect.team === team;
@@ -23,22 +30,89 @@ const TeamSection = ({ team, side, teamData }) => {
     transition: 'text-shadow 0.8s ease-out'
   };
 
+  const handleScoreIncrease = () => {
+    updateScore(team, 1);
+    triggerGoalCelebration(team);
+  };
+
+  const handleScoreDecrease = () => {
+    updateScore(team, -1);
+    triggerScoreChange(team);
+  };
+
+  const handleSaveName = () => {
+    if (tempName.trim()) {
+      updateTeamName(team, tempName.trim());
+    }
+    setIsEditingName(false);
+  };
+
+  const handleCancelEdit = () => {
+    setTempName(teamData.name);
+    setIsEditingName(false);
+  };
+
   return (
     <div
       className={`flex flex-col items-center relative ${isRedCardEffect ? 'red-card-shake' : ''}`}
     >
-      <div
-        className={`font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-team uppercase tracking-wider mb-3 md:mb-4 lg:mb-5 xl:mb-6 text-center min-h-[2.5rem] md:min-h-[3.5rem] lg:min-h-[4.5rem] xl:min-h-[5.5rem] 2xl:min-h-[6rem] flex items-center justify-center px-2`}
-        style={{ color: teamColor }}
-      >
-        {teamData.name}
-      </div>
-      <div
-        className={`font-display text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
-        style={scoreStyle}
-      >
-        {teamData.score}
-      </div>
+      {/* Team Name - clickable to edit on mobile */}
+      {isMobileDevice && isEditingName ? (
+        <div className="w-full flex items-center justify-center gap-2 mb-3 md:mb-4">
+          <input
+            type="text"
+            value={tempName}
+            onChange={(e) => setTempName(e.target.value)}
+            onBlur={handleSaveName}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSaveName();
+              if (e.key === 'Escape') handleCancelEdit();
+            }}
+            maxLength={20}
+            className={`flex-1 ${isPhone ? 'max-w-[250px] text-2xl px-4 py-3' : 'max-w-[200px] md:max-w-[300px] text-lg md:text-3xl px-3 md:px-4 py-2 md:py-3'} bg-steelBlue/50 border-2 border-electricMint text-white font-heading text-center rounded-lg focus:outline-none uppercase`}
+            autoFocus
+          />
+        </div>
+      ) : (
+        <div
+          onClick={() => isMobileDevice && setIsEditingName(true)}
+          className={`font-heading ${isPhone ? 'text-3xl mb-3 min-h-[3rem]' : 'text-2xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-team mb-2 md:mb-4 lg:mb-5 xl:mb-6 min-h-[2rem] md:min-h-[4rem] lg:min-h-[4.5rem] xl:min-h-[5.5rem] 2xl:min-h-[6rem]'} uppercase tracking-wider text-center flex items-center justify-center px-2 ${isMobileDevice ? 'cursor-pointer active:opacity-70' : ''}`}
+          style={{ color: teamColor }}
+        >
+          {teamData.name}
+        </div>
+      )}
+      {/* Mobile touch controls - only visible on mobile devices */}
+      {isMobileDevice ? (
+        <div className={`w-full flex items-center justify-center ${isPhone ? 'gap-5 mb-3' : 'gap-3 md:gap-6 mb-1 md:mb-4'}`}>
+          <button
+            onClick={handleScoreDecrease}
+            className={`${isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
+          >
+            -
+          </button>
+          <div
+            className={`font-display ${isPhone ? 'text-7xl' : 'text-5xl md:text-9xl'} font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
+            style={scoreStyle}
+          >
+            {teamData.score}
+          </div>
+          <button
+            onClick={handleScoreIncrease}
+            className={`${isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
+          >
+            +
+          </button>
+        </div>
+      ) : (
+        /* Desktop view - score only, no touch controls */
+        <div
+          className={`font-display text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
+          style={scoreStyle}
+        >
+          {teamData.score}
+        </div>
+      )}
       <CardIndicators
         yellowCards={teamData.yellowCards}
         redCards={teamData.redCards}

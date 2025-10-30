@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MatchProvider, useMatch } from './MatchContext';
 import { AnimationProvider } from './AnimationContext';
 import { useKeyboardShortcuts } from './useKeyboardShortcuts';
+import { useDeviceDetection } from './useDeviceDetection';
 import ScoreboardDisplay from './ScoreboardDisplay';
 import ControlPanel from './ControlPanel';
 import NextMatchModal from './NextMatchModal';
@@ -12,6 +13,7 @@ function AppContent() {
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
   const { resetTimer } = useMatch();
+  const { isMobileDevice, isPortrait, isPhone } = useDeviceDetection();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
 
   const confirmResetTimer = () => {
@@ -21,9 +23,12 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
-      <ScoreboardDisplay presentationMode={presentationMode} />
+      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} />
 
-      {!presentationMode && <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />}
+      {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
+      {!presentationMode && !isMobileDevice && (
+        <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />
+      )}
 
       {/* Projector Mode Indicator - visible on hover */}
       {presentationMode && (
