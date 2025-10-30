@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  background: #0A1628;
+}
+
+/* Custom Animations */
+@keyframes scoreChange {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes radialPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 40px rgba(0, 255, 135, 0);
+  }
+}
+
+@keyframes goalFlash {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(0, 255, 135, 0.3);
+  }
+}
+
+@keyframes sweepBar {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hoverGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 135, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 135, 0.6);
+  }
+}
+
+/* Animation Classes */
+.score-animate {
+  animation: scoreChange 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.score-pulse {
+  animation: radialPulse 600ms ease-out;
+}
+
+.goal-celebration-flash {
+  animation: goalFlash 100ms ease-in-out;
+}
+
+.scoreboard-bar {
+  animation: sweepBar 800ms ease-out;
+}
+
+.red-card-shake {
+  animation: shake 300ms ease-in-out;
+  filter: grayscale(0.5);
+}
+
+.scan-line-animate {
+  animation: scanLine 3000ms linear infinite;
+}
+
+.modal-animate {
+  animation: modalFadeIn 200ms ease-out;
+}
+
+.button-glow:hover {
+  animation: hoverGlow 1500ms ease-in-out infinite;
+}
+
+.button-press:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease-out;
+}
+
+/* Utility Classes */
+.gradient-background {
+  background: linear-gradient(135deg, #0A1628 0%, #1E3A5F 100%);
+}
+
+.gradient-control-panel {
+  background: linear-gradient(180deg, rgba(30,58,95,0.95) 0%, rgba(10,22,40,0.98) 100%);
+}
