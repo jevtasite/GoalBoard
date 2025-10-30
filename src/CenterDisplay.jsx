@@ -7,19 +7,29 @@ const CenterDisplay = () => {
   const isLowTime = timer.minutes < 5 && (period === 'First Half' || period === 'Second Half');
   const timerColor = isLowTime ? 'text-electricMint' : 'text-white';
 
-  const formatTime = (mins, secs) => {
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  const formatTime = (mins, secs, ms) => {
+    const formattedMins = String(mins).padStart(2, '0');
+    const formattedSecs = String(secs).padStart(2, '0');
+    const formattedMs = String(ms).padStart(2, '0');
+    return { formattedMins, formattedSecs, formattedMs };
   };
+
+  const { formattedMins, formattedSecs, formattedMs } = formatTime(timer.minutes, timer.seconds, timer.milliseconds);
 
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-8">
-      <div className="font-heading text-3xl md:text-4xl text-slateGray mb-2 md:mb-4">
+      <div className="font-heading text-5xl md:text-6xl lg:text-vs text-slateGray mb-4 md:mb-6">
         VS
       </div>
-      <div className={`font-mono text-5xl md:text-timer font-bold ${timerColor} leading-none tracking-wider mb-2 md:mb-4`}>
-        {formatTime(timer.minutes, timer.seconds)}
+      <div className={`flex items-baseline ${timerColor} mb-4 md:mb-6`}>
+        <span className="font-mono text-6xl md:text-8xl lg:text-timer font-bold leading-none tracking-wider">
+          {formattedMins}:{formattedSecs}
+        </span>
+        <span className="font-mono text-3xl md:text-5xl lg:text-timer-ms font-bold leading-none ml-1 md:ml-2">
+          .{formattedMs}
+        </span>
       </div>
-      <div className="font-heading text-lg md:text-period uppercase tracking-widest text-slateGray">
+      <div className="font-heading text-2xl md:text-3xl lg:text-period uppercase tracking-widest text-slateGray">
         {period}
       </div>
     </div>

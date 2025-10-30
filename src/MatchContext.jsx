@@ -3,6 +3,12 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const MatchContext = createContext();
 
 export const MatchProvider = ({ children }) => {
+  // Load zoom from localStorage or default to 150 (max)
+  const [zoomLevel, setZoomLevel] = useState(() => {
+    const savedZoom = localStorage.getItem('scoreboardZoom');
+    return savedZoom ? parseInt(savedZoom, 10) : 150;
+  });
+
   const [matchState, setMatchState] = useState({
     teamA: {
       name: 'Team A',
@@ -23,6 +29,7 @@ export const MatchProvider = ({ children }) => {
     timer: {
       minutes: 0,
       seconds: 0,
+      milliseconds: 0,
       isRunning: false,
       startTime: null,
       elapsedTime: 0,
@@ -30,15 +37,21 @@ export const MatchProvider = ({ children }) => {
     period: 'First Half',
   });
 
-  // Timer logic
+  // Save zoom to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('scoreboardZoom', zoomLevel.toString());
+  }, [zoomLevel]);
+
+  // Timer logic - Update every 10ms for millisecond precision
   useEffect(() => {
     let interval;
     if (matchState.timer.isRunning) {
       interval = setInterval(() => {
         const now = Date.now();
-        const elapsed = Math.floor((now - matchState.timer.startTime + matchState.timer.elapsedTime) / 1000);
-        const minutes = Math.floor(elapsed / 60);
-        const seconds = elapsed % 60;
+        const totalElapsed = now - matchState.timer.startTime + matchState.timer.elapsedTime;
+        const minutes = Math.floor(totalElapsed / 60000);
+        const seconds = Math.floor((totalElapsed % 60000) / 1000);
+        const milliseconds = Math.floor((totalElapsed % 1000) / 10); // Show centiseconds (0-99)
 
         setMatchState(prev => ({
           ...prev,
@@ -46,9 +59,10 @@ export const MatchProvider = ({ children }) => {
             ...prev.timer,
             minutes,
             seconds,
+            milliseconds,
           }
         }));
-      }, 1000);
+      }, 10); // Update every 10ms for smooth millisecond display
     }
     return () => clearInterval(interval);
   }, [matchState.timer.isRunning, matchState.timer.startTime]);
@@ -116,6 +130,7 @@ export const MatchProvider = ({ children }) => {
       timer: {
         minutes: 0,
         seconds: 0,
+        milliseconds: 0,
         isRunning: false,
         startTime: null,
         elapsedTime: 0,
@@ -161,6 +176,7 @@ export const MatchProvider = ({ children }) => {
       timer: {
         minutes: 0,
         seconds: 0,
+        milliseconds: 0,
         isRunning: false,
         startTime: null,
         elapsedTime: 0,
@@ -171,6 +187,8 @@ export const MatchProvider = ({ children }) => {
 
   const value = {
     matchState,
+    zoomLevel,
+    setZoomLevel,
     updateScore,
     updateCards,
     updateStats,

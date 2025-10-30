@@ -25,6 +25,16 @@ A professional football (soccer) scoreboard web application built with React. Th
   - Period selector (First Half, Half Time, Second Half, Extra Time, Full Time)
   - Next match reset functionality
   - Fullscreen toggle
+  - **Presentation Mode** - Hide controls for clean projection
+
+### Presentation Mode 🎥
+Perfect for projection! Press `Tab` or click the "📺 Present" button to:
+- Hide all operator controls
+- Expand scoreboard to full screen
+- Control everything via keyboard shortcuts
+- Press `Tab` again to show controls
+
+This solves the operator problem - you can control the scoreboard with keyboard shortcuts while spectators only see the clean scoreboard display!
 
 ### Animations
 - Goal celebration with background flash and sweeping bars
@@ -53,6 +63,7 @@ Power users can control everything via keyboard:
 - `K` - Team B red card +1
 
 **Utility:**
+- `Tab` - Toggle presentation mode (hide/show controls)
 - `F` - Toggle fullscreen
 - `N` - Next match dialog
 - `Escape` - Close dialogs

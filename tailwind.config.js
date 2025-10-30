@@ -13,6 +13,8 @@ export default {
         broadcastRed: '#FF2D55',
         slateGray: '#8E99AB',
         goalGreen: '#34C759',
+        teamA: '#00FF87',           // Electric Mint - cyan/green
+        teamB: '#FF8C00',           // Broadcast Orange - warm contrast
       },
       fontFamily: {
         display: ['Rajdhani', 'sans-serif'],
@@ -21,10 +23,12 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
-        'score': '144px',
-        'team': '48px',
-        'timer': '72px',
-        'period': '24px',
+        'score': '240px',        // Increased from 144px
+        'team': '80px',          // Increased from 48px
+        'timer': '120px',        // Increased from 72px
+        'timer-ms': '60px',      // For milliseconds
+        'period': '40px',        // Increased from 24px
+        'vs': '64px',            // For VS indicator
       },
       spacing: {
         'xs': '8px',

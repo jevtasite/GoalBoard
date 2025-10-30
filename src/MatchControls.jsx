@@ -3,10 +3,14 @@ import { useMatch } from './MatchContext';
 import PeriodSelector from './PeriodSelector';
 import NextMatchModal from './NextMatchModal';
 
-const MatchControls = () => {
-  const { matchState, toggleTimer, resetTimer } = useMatch();
+const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal }) => {
+  const { matchState, toggleTimer, zoomLevel, setZoomLevel } = useMatch();
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const { timer } = matchState;
+
+  const handleResetTimer = () => {
+    setShowResetConfirmModal(true);
+  };
 
   const formatTime = (mins, secs) => {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
@@ -45,7 +49,7 @@ const MatchControls = () => {
         </button>
 
         <button
-          onClick={resetTimer}
+          onClick={handleResetTimer}
           className="relative px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
           title="Reset timer (R)"
         >
@@ -58,6 +62,31 @@ const MatchControls = () => {
 
       <PeriodSelector />
 
+      {/* Zoom Control */}
+      <div className="bg-broadcastNavy/30 rounded-lg p-4 mt-2">
+        <div className="flex items-center justify-between mb-3">
+          <label className="font-body text-sm text-electricMint font-semibold">
+            Scoreboard Size
+          </label>
+          <span className="font-mono text-electricMint text-sm font-bold">
+            {zoomLevel}%
+          </span>
+        </div>
+        <input
+          type="range"
+          min="50"
+          max="150"
+          step="5"
+          value={zoomLevel}
+          onChange={(e) => setZoomLevel(parseInt(e.target.value, 10))}
+          className="w-full h-2 bg-steelBlue rounded-lg appearance-none cursor-pointer slider"
+        />
+        <div className="flex justify-between mt-2">
+          <span className="text-xs text-slateGray">50%</span>
+          <span className="text-xs text-slateGray">150%</span>
+        </div>
+      </div>
+
       <button
         onClick={() => setShowNextMatchModal(true)}
         className="relative w-full px-4 py-3 bg-goalGreen hover:bg-goalGreen/80 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg mt-2"
@@ -69,16 +98,29 @@ const MatchControls = () => {
         </span>
       </button>
 
-      <button
-        onClick={toggleFullscreen}
-        className="relative w-full px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
-        title="Toggle fullscreen (F)"
-      >
-        ⛶ Fullscreen
-        <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
-          F
-        </span>
-      </button>
+      <div className="flex gap-3">
+        <button
+          onClick={toggleFullscreen}
+          className="relative flex-1 px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+          title="Toggle fullscreen (F)"
+        >
+          ⛶ Fullscreen
+          <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
+            F
+          </span>
+        </button>
+
+        <button
+          onClick={() => setPresentationMode(true)}
+          className="relative flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+          title="Projector mode (Tab)"
+        >
+          📽️ Projector
+          <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
+            Tab
+          </span>
+        </button>
+      </div>
 
       <NextMatchModal
         isOpen={showNextMatchModal}

@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useMatch } from './MatchContext';
 import { useAnimations } from './AnimationContext';
 
-export const useKeyboardShortcuts = (setShowNextMatchModal) => {
+export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal) => {
   const {
     updateScore,
     updateCards,
+    updateStats,
     toggleTimer,
     resetTimer,
   } = useMatch();
@@ -14,7 +15,14 @@ export const useKeyboardShortcuts = (setShowNextMatchModal) => {
 
   useEffect(() => {
     const handleKeyPress = (e) => {
-      // Ignore if typing in input field
+      // Handle Tab key for presentation mode toggle (works even in input fields)
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        setPresentationMode(prev => !prev);
+        return;
+      }
+
+      // Ignore other shortcuts if typing in input field
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
         return;
       }
@@ -48,7 +56,9 @@ export const useKeyboardShortcuts = (setShowNextMatchModal) => {
           toggleTimer();
           break;
         case 'r':
-          resetTimer();
+          if (setShowResetConfirmModal) {
+            setShowResetConfirmModal(true);
+          }
           break;
 
         // Team A Cards
@@ -69,15 +79,35 @@ export const useKeyboardShortcuts = (setShowNextMatchModal) => {
           triggerRedCard('teamB');
           break;
 
+        // Team A Fouls
+        case 'a':
+          updateStats('teamA', 'fouls', 1);
+          break;
+        case 's':
+          updateStats('teamA', 'fouls', -1);
+          break;
+
+        // Team B Fouls
+        case 'l':
+          updateStats('teamB', 'fouls', 1);
+          break;
+        case ',':
+          updateStats('teamB', 'fouls', -1);
+          break;
+
         // Utility
         case 'f':
           toggleFullscreen();
           break;
         case 'n':
-          setShowNextMatchModal(true);
+          if (setShowNextMatchModal) {
+            setShowNextMatchModal(true);
+          }
           break;
         case 'escape':
-          setShowNextMatchModal(false);
+          if (setShowNextMatchModal) {
+            setShowNextMatchModal(false);
+          }
           break;
 
         default:
@@ -87,7 +117,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal) => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [updateScore, updateCards, toggleTimer, resetTimer, triggerGoalCelebration, triggerRedCard, triggerScoreChange, setShowNextMatchModal]);
+  }, [updateScore, updateCards, updateStats, toggleTimer, resetTimer, triggerGoalCelebration, triggerRedCard, triggerScoreChange, setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal]);
 };
 
 const toggleFullscreen = () => {
