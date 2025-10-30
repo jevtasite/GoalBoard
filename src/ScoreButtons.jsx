@@ -3,7 +3,7 @@ import { useAnimations } from './AnimationContext';
 
 const ScoreButtons = ({ team, currentScore }) => {
   const { updateScore } = useMatch();
-  const { triggerGoalCelebration, triggerScoreChange } = useAnimations();
+  const { triggerGoalCelebration } = useAnimations();
 
   const handleIncrement = () => {
     updateScore(team, 1);
@@ -13,7 +13,7 @@ const ScoreButtons = ({ team, currentScore }) => {
   const handleDecrement = () => {
     if (currentScore > 0) {
       updateScore(team, -1);
-      triggerScoreChange(team);
+      // No animation when removing a goal
     }
   };
 

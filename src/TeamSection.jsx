@@ -7,7 +7,7 @@ import { Pencil, Check, X } from 'lucide-react';
 const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = false }) => {
   const { animations } = useAnimations();
   const { updateScore, updateTeamName } = useMatch();
-  const { triggerGoalCelebration, triggerScoreChange } = useAnimations();
+  const { triggerGoalCelebration } = useAnimations();
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(teamData.name);
 
@@ -37,7 +37,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
 
   const handleScoreDecrease = () => {
     updateScore(team, -1);
-    triggerScoreChange(team);
+    // No animation when removing a goal
   };
 
   const handleSaveName = () => {
