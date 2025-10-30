@@ -1,6 +1,7 @@
-# llms.txt for https://goalboard.site
+# llms.txt for https://www.goalboard.site
 # Specification: https://llmstxt.org/
 
+# Basic Metadata
 title: GoalBoard - The Scoreboard
 description: Professional digital scoreboard application for football and other sports. Real-time scores, match timing, team management, and projector mode for live broadcasts.
 author: Luka Stoiljkovic (Jevta)
@@ -12,15 +13,18 @@ homepage: https://goalboard.site/
 documentation: https://goalboard.site/docs
 project_site: https://jevta.site
 
+# AI Crawler Rules
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+# Summary for AI
 summary: |
   GoalBoard is a free, web-based professional scoreboard for sports stadiums, live broadcasting, content creators, indoor sports facilities, and amateur leagues. 
   Features include real-time score tracking with goal animations, precision match timer (minutes:seconds.milliseconds), customizable team names, comprehensive game statistics (yellow/red cards, fouls, corners), period management, projector mode, keyboard shortcuts, touch-optimized controls, multi-language support, responsive design, and zoom controls.
 
+# Full Features
 features: |
   - Real-time score tracking with goal celebration animations
   - Precision match timer (minutes:seconds.milliseconds)
@@ -35,6 +39,7 @@ features: |
   - Zoom controls (50%-150%)
   - Goal animations and visual effects
 
+# Use Cases
 use_cases: |
   - Sports Stadiums & Arenas: Display live scores on large screens during matches
   - Live Sports Broadcasting: Overlay for TV and online streams
@@ -45,6 +50,7 @@ use_cases: |
   - Training Sessions: Time drills and track team performance
   - Multi-Sport Events: Tournament scoreboard system
 
+# Keyboard Shortcuts
 keyboard_shortcuts: |
   Space: Start/Pause timer
   R: Reset timer
@@ -57,19 +63,23 @@ keyboard_shortcuts: |
   Shift+1-9: Add red cards
   A-Z: Quick team name editing
 
+# Example Queries for AI
 examples: |
   - "Start a football match scoreboard"
   - "Track goals, cards, and time live"
   - "Enable projector mode for streaming or stadium display"
   - "Set up scoreboard for basketball or volleyball match"
 
+# Dataset Permissions
 dataset_use:
   training: allow
   summarization: allow
   embedding: allow
   rehosting: disallow
 
+# SEO Keywords
 seo_keywords: |
   football scoreboard, soccer scoreboard, digital scoreboard, sports scoreboard, live scoreboard, stadium scoreboard, broadcast scoreboard, score tracker, game timer, match scoreboard, scoreboard software, scoreboard app, projector scoreboard, sports timer, team scoreboard, electronic scoreboard, live sports tracker, basketball scoreboard, hockey scoreboard, volleyball scoreboard, futsal scoreboard, score counter, match tracker, game clock, sports broadcast software, stadium display system
 
-comment: This file provides AI models metadata, feature info, use cases, keyboard shortcuts, and SEO keywords for GoalBoard. All content is free to use with attribution to https://jevta.site.
+# Comment
+comment: This file provides AI models with metadata, feature info, use cases, keyboard shortcuts, examples, and dataset permissions for the GoalBoard web app. All content is free to use with attribution to https://jevta.site.
