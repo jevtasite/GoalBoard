@@ -26,7 +26,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
-      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} />
+      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
 
       {/* Language Selector for mobile devices */}
       {isMobileDevice && !presentationMode && (

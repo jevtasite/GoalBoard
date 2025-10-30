@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useMatch } from './MatchContext';
 import { useTranslation } from './TranslationContext';
-import { Play, Pause, ChevronDown } from 'lucide-react';
+import { Play, Pause, ChevronDown, RotateCcw } from 'lucide-react';
 
-const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandscape = false }) => {
+const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal }) => {
   const { matchState, toggleTimer, updatePeriod } = useMatch();
   const { t } = useTranslation();
   const { timer, period } = matchState;
@@ -55,24 +55,33 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandsca
         </span>
       </div>
 
-      {/* Mobile timer control button - only visible on mobile devices */}
+      {/* Mobile timer control buttons - only visible on mobile devices */}
       {isMobileDevice && (
-        <button
-          onClick={toggleTimer}
-          className={`${isPhoneLandscape ? 'mb-1 px-4 py-2 text-sm' : isPhone ? 'mb-3 px-7 py-3 text-lg' : 'mb-2 md:mb-4 px-5 md:px-8 py-2 md:py-4 text-sm md:text-xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
-        >
-          {timer.isRunning ? (
-            <>
-              <Pause className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
-              {t('pause')}
-            </>
-          ) : (
-            <>
-              <Play className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
-              {t('start')}
-            </>
-          )}
-        </button>
+        <div className={`flex items-center ${isPhoneLandscape ? 'gap-2 mb-1' : isPhone ? 'gap-3 mb-3' : 'gap-2 md:gap-3 mb-2 md:mb-4'}`}>
+          <button
+            onClick={toggleTimer}
+            className={`${isPhoneLandscape ? 'px-4 py-2 text-sm' : isPhone ? 'px-7 py-3 text-lg' : 'px-5 md:px-8 py-2 md:py-4 text-sm md:text-xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
+          >
+            {timer.isRunning ? (
+              <>
+                <Pause className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
+                {t('pause')}
+              </>
+            ) : (
+              <>
+                <Play className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
+                {t('start')}
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => setShowResetConfirmModal && setShowResetConfirmModal(true)}
+            className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
+            title={t('reset')}
+          >
+            <RotateCcw className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
+          </button>
+        </div>
       )}
 
       {/* Period Display - tappable on mobile */}
