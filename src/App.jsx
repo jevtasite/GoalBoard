@@ -15,7 +15,7 @@ function AppContent() {
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
   const { resetTimer } = useMatch();
-  const { isMobileDevice, isPortrait, isPhone } = useDeviceDetection();
+  const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
   const { t } = useTranslation();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
 
@@ -26,7 +26,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
-      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} />
+      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} />
 
       {/* Language Selector for mobile devices */}
       {isMobileDevice && !presentationMode && (

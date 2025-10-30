@@ -4,7 +4,7 @@ import { useMatch } from './MatchContext';
 import CardIndicators from './CardIndicators';
 import { Pencil, Check, X } from 'lucide-react';
 
-const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = false }) => {
+const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = false, isPhoneLandscape = false }) => {
   const { animations } = useAnimations();
   const { updateScore, updateTeamName } = useMatch();
   const { triggerGoalCelebration } = useAnimations();
@@ -76,7 +76,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
       ) : (
         <div
           onClick={() => isMobileDevice && setIsEditingName(true)}
-          className={`font-heading ${isPhone ? 'text-3xl mb-3 min-h-[3rem]' : 'text-2xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-team mb-2 md:mb-4 lg:mb-5 xl:mb-6 min-h-[2rem] md:min-h-[4rem] lg:min-h-[4.5rem] xl:min-h-[5.5rem] 2xl:min-h-[6rem]'} uppercase tracking-wider text-center flex items-center justify-center px-2 ${isMobileDevice ? 'cursor-pointer active:opacity-70' : ''}`}
+          className={`font-heading ${isPhoneLandscape ? 'text-xl mb-1 min-h-[1.75rem]' : isPhone ? 'text-3xl mb-3 min-h-[3rem]' : 'text-2xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-team mb-2 md:mb-4 lg:mb-5 xl:mb-6 min-h-[2rem] md:min-h-[4rem] lg:min-h-[4.5rem] xl:min-h-[5.5rem] 2xl:min-h-[6rem]'} uppercase tracking-wider text-center flex items-center justify-center px-2 ${isMobileDevice ? 'cursor-pointer active:opacity-70' : ''}`}
           style={{ color: teamColor }}
         >
           {teamData.name}
@@ -84,22 +84,22 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
       )}
       {/* Mobile touch controls - only visible on mobile devices */}
       {isMobileDevice ? (
-        <div className={`w-full flex items-center justify-center ${isPhone ? 'gap-5 mb-3' : 'gap-3 md:gap-6 mb-1 md:mb-4'}`}>
+        <div className={`w-full flex items-center justify-center ${isPhoneLandscape ? 'gap-3' : isPhone ? 'gap-5 mb-3' : 'gap-3 md:gap-6 mb-1 md:mb-4'}`}>
           <button
             onClick={handleScoreDecrease}
-            className={`${isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
+            className={`${isPhoneLandscape ? 'w-12 h-12 text-xl' : isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
           >
             -
           </button>
           <div
-            className={`font-display ${isPhone ? 'text-7xl' : 'text-5xl md:text-9xl'} font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
+            className={`font-display ${isPhoneLandscape ? 'text-6xl' : isPhone ? 'text-7xl' : 'text-5xl md:text-9xl'} font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
             style={scoreStyle}
           >
             {teamData.score}
           </div>
           <button
             onClick={handleScoreIncrease}
-            className={`${isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
+            className={`${isPhoneLandscape ? 'w-12 h-12 text-xl' : isPhone ? 'w-14 h-14 text-2xl' : 'w-10 h-10 md:w-16 md:h-16 text-xl md:text-3xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy rounded-full flex items-center justify-center font-bold transition-all shadow-lg flex-shrink-0`}
           >
             +
           </button>

@@ -4,7 +4,8 @@ export const useDeviceDetection = () => {
   const [deviceInfo, setDeviceInfo] = useState({
     isMobileDevice: false,
     isPortrait: false,
-    isPhone: false
+    isPhone: false,
+    isPhoneLandscape: false
   });
 
   useEffect(() => {
@@ -47,10 +48,16 @@ export const useDeviceDetection = () => {
       const isPhoneSize = window.innerWidth < 768;
       const isPhone = isMobile && isPhoneSize;
 
+      // Detect if phone is in landscape mode
+      // Check: device is mobile AND in landscape AND has small height (phone-specific)
+      // Phone in landscape typically has height < 500px (catches most phones)
+      const isPhoneLandscape = isMobile && !isPortrait && window.innerHeight < 500;
+
       setDeviceInfo({
         isMobileDevice: isMobile,
         isPortrait: isPortrait,
-        isPhone: isPhone
+        isPhone: isPhone,
+        isPhoneLandscape: isPhoneLandscape
       });
     };
 
