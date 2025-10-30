@@ -11,7 +11,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
     resetTimer,
   } = useMatch();
 
-  const { triggerGoalCelebration, triggerRedCard, triggerScoreChange } = useAnimations();
+  const { triggerGoalCelebration, triggerRedCard } = useAnimations();
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -33,7 +33,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
         // Team A Score
         case 'q':
           updateScore('teamA', -1);
-          triggerScoreChange('teamA');
+          // No animation when removing a goal
           break;
         case 'w':
           updateScore('teamA', 1);
@@ -43,7 +43,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
         // Team B Score
         case 'o':
           updateScore('teamB', -1);
-          triggerScoreChange('teamB');
+          // No animation when removing a goal
           break;
         case 'p':
           updateScore('teamB', 1);
@@ -99,7 +99,7 @@ export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode,
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [updateScore, updateCards, updateStats, toggleTimer, resetTimer, triggerGoalCelebration, triggerRedCard, triggerScoreChange, setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal]);
+  }, [updateScore, updateCards, updateStats, toggleTimer, resetTimer, triggerGoalCelebration, triggerRedCard, setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal]);
 };
 
 const toggleFullscreen = () => {

@@ -1,0 +1,79 @@
+# GoalBoard - The Scoreboard
+
+> Professional digital scoreboard for football, soccer, and sports broadcasts
+> Developed by Jevta (Luka Stoiljkovic) - https://jevta.site
+
+## Overview
+
+GoalBoard is a professional, web-based scoreboard application designed for stadiums, sports facilities, live streaming, and broadcasts. It provides real-time score tracking, match timing, and comprehensive game statistics.
+
+## Key Features
+
+- **Live Score Tracking**: Real-time score updates for both teams with goal celebration animations
+- **Precision Timer**: Match timer with minutes, seconds, and milliseconds display
+- **Team Management**: Customizable team names with easy editing
+- **Game Statistics**: Track yellow cards, red cards, fouls, and corner kicks
+- **Period Control**: Support for First Half, Second Half, and Extra Time
+- **Projector Mode**: Full-screen presentation mode optimized for stadium displays
+- **Keyboard Shortcuts**: Fast control with comprehensive keyboard shortcuts for all functions
+- **Touch Controls**: Mobile-friendly interface with touch buttons for score and timer control
+- **Multi-Language Support**: Available in English and Serbian (Srpski)
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Goal Animations**: Visual celebration effects when goals are scored
+- **Zoom Controls**: Adjustable display size (50%-150%) for optimal viewing
+
+## Target Audience
+
+- Sports stadiums and arenas
+- Gymnasiums and recreation centers
+- Live sports broadcasters
+- Sports streamers and content creators
+- Amateur sports leagues
+- School and university athletic departments
+- Community sports organizations
+- Indoor sports facilities
+
+## Technical Specifications
+
+- **Platform**: Web-based (works in any modern browser)
+- **Device Compatibility**: Desktop, laptop, tablet, smartphone
+- **Display Modes**: Standard view, Projector mode, Touch-optimized mobile view
+- **Languages**: English, Serbian
+- **Free to use**: No subscription or payment required
+
+## Use Cases
+
+1. **Stadium Broadcasting**: Display live scores on large screens during matches
+2. **Live Streaming**: Professional scoreboard overlay for sports streams
+3. **Indoor Games**: Track scores for basketball, volleyball, hockey, and other sports
+4. **Training Sessions**: Time drills and track team statistics
+5. **Amateur Leagues**: Professional-looking scoreboard for community sports
+6. **Multi-Sport Events**: Versatile tracking for various sports competitions
+
+## Keywords
+
+football scoreboard, soccer scoreboard, game scoreboard, sports scoreboard, live scoreboard, digital scoreboard, stadium scoreboard, broadcast scoreboard, score tracker, game timer, match scoreboard, electronic scoreboard, scoreboard software, scoreboard app, projector scoreboard, live sports tracker, team scoreboard, basketball scoreboard, hockey scoreboard, volleyball scoreboard
+
+## Related Terms
+
+score counter, match tracker, game clock, sports timer, team score display, live match board, electronic score display, digital score keeper, sports broadcast software, stadium display system, game scorekeeping, athletic scoreboard, competition tracker
+
+## Application Details
+
+- **Application Name**: GoalBoard - The Scoreboard
+- **Short Name**: GoalBoard
+- **Category**: Sports Application, Scoreboard Software
+- **Type**: Web Application (PWA)
+- **License**: Free to use
+- **Website**: https://goalboard.site
+- **Developer**: Jevta (Luka Stoiljkovic)
+- **Developer Website**: https://jevta.site
+
+## Contact & Information
+
+For more information about GoalBoard, visit the website at https://goalboard.site or contact the developer at https://jevta.site
+
+---
+
+Last Updated: 2025-10-30
+Version: 1.0.0

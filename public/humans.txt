@@ -1,0 +1,30 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Developer: Jevta (Luka Stoiljkovic)
+    Site: https://jevta.site
+    Project: https://goalboard.site
+    Location: Worldwide
+
+# THANKS
+
+    To all sports enthusiasts and coaches who need a reliable scoreboard solution
+
+# TECHNOLOGY COLOPHON
+
+    Languages: JavaScript, JSX
+    Frameworks: React 18, Vite
+    Styling: Tailwind CSS
+    Icons: Lucide React
+    Fonts: Rajdhani, Bebas Neue, Inter, JetBrains Mono (Google Fonts)
+    Standards: HTML5, CSS3, ES6+
+    Features: PWA, Responsive Design, Multi-language Support
+
+# SITE
+
+    Last update: 2025/10/30
+    Standards: HTML5, CSS3, Schema.org
+    Components: React, Context API
+    Software: Visual Studio Code
