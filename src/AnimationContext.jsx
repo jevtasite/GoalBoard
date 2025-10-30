@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef } from 'react';
 
 const AnimationContext = createContext();
 
@@ -9,53 +9,85 @@ export const AnimationProvider = ({ children }) => {
     scoreChange: { active: false, team: null },
   });
 
+  // Store timeout refs to clear them if needed
+  const timeoutRefs = useRef({
+    goalCelebration: null,
+    scoreChange: null,
+    redCardEffect: null,
+  });
+
   const triggerGoalCelebration = (team) => {
+    // Clear any existing timeouts for this team's animations
+    if (timeoutRefs.current.goalCelebration) {
+      clearTimeout(timeoutRefs.current.goalCelebration);
+    }
+    if (timeoutRefs.current.scoreChange) {
+      clearTimeout(timeoutRefs.current.scoreChange);
+    }
+
+    // Immediately set animations active
     setAnimations(prev => ({
       ...prev,
       goalCelebration: { active: true, team },
       scoreChange: { active: true, team },
     }));
 
-    setTimeout(() => {
-      setAnimations(prev => ({
-        ...prev,
-        goalCelebration: { active: false, team: null },
-      }));
-    }, 1300); // Duration of full celebration
-
-    setTimeout(() => {
+    // Clear score change animation first
+    timeoutRefs.current.scoreChange = setTimeout(() => {
       setAnimations(prev => ({
         ...prev,
         scoreChange: { active: false, team: null },
       }));
+      timeoutRefs.current.scoreChange = null;
     }, 400);
+
+    // Clear goal celebration animation
+    timeoutRefs.current.goalCelebration = setTimeout(() => {
+      setAnimations(prev => ({
+        ...prev,
+        goalCelebration: { active: false, team: null },
+      }));
+      timeoutRefs.current.goalCelebration = null;
+    }, 1300); // Duration of full celebration
   };
 
   const triggerRedCard = (team) => {
+    // Clear any existing timeout
+    if (timeoutRefs.current.redCardEffect) {
+      clearTimeout(timeoutRefs.current.redCardEffect);
+    }
+
     setAnimations(prev => ({
       ...prev,
       redCardEffect: { active: true, team },
     }));
 
-    setTimeout(() => {
+    timeoutRefs.current.redCardEffect = setTimeout(() => {
       setAnimations(prev => ({
         ...prev,
         redCardEffect: { active: false, team: null },
       }));
+      timeoutRefs.current.redCardEffect = null;
     }, 300);
   };
 
   const triggerScoreChange = (team) => {
+    // Clear any existing timeout
+    if (timeoutRefs.current.scoreChange) {
+      clearTimeout(timeoutRefs.current.scoreChange);
+    }
+
     setAnimations(prev => ({
       ...prev,
       scoreChange: { active: true, team },
     }));
 
-    setTimeout(() => {
+    timeoutRefs.current.scoreChange = setTimeout(() => {
       setAnimations(prev => ({
         ...prev,
         scoreChange: { active: false, team: null },
       }));
+      timeoutRefs.current.scoreChange = null;
     }, 400);
   };
 
