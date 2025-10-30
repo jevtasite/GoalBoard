@@ -15,9 +15,6 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false }) => {
     { key: 'extraTime', label: t('extraTime'), value: 'Extra Time' }
   ];
 
-  const isLowTime = timer.minutes < 5 && (period === t('firstHalf') || period === t('secondHalf') || period === 'First Half' || period === 'Second Half');
-  const timerColor = isLowTime ? 'text-electricMint' : 'text-white';
-
   const formatTime = (mins, secs, ms) => {
     const formattedMins = String(mins).padStart(2, '0');
     const formattedSecs = String(secs).padStart(2, '0');
@@ -49,7 +46,7 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false }) => {
       </div>
 
       {/* Timer Display */}
-      <div className={`flex items-baseline ${timerColor} ${isPhone ? 'mb-3' : 'mb-2 md:mb-4 lg:mb-5 xl:mb-6 2xl:mb-8'}`}>
+      <div className={`flex items-baseline text-white ${isPhone ? 'mb-3' : 'mb-2 md:mb-4 lg:mb-5 xl:mb-6 2xl:mb-8'}`}>
         <span className={`font-mono ${isPhone ? 'text-5xl' : 'text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-timer'} font-bold leading-none tracking-wider`}>
           {formattedMins}:{formattedSecs}
         </span>
