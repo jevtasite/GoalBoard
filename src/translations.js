@@ -79,7 +79,7 @@ export const translations = {
     // Stats
     yellowCards: "Žuti Kartoni",
     redCards: "Crveni Kartoni",
-    fouls: "Faulovi",
+    fouls: "Faul",
     corners: "Korneri",
 
     // Actions
@@ -89,9 +89,11 @@ export const translations = {
 
     // Modals
     resetTimerTitle: "Resetovati Tajmer?",
-    resetTimerMessage: "Da li ste sigurni da želite da resetujete tajmer na 00:00?",
+    resetTimerMessage:
+      "Da li ste sigurni da želite da resetujete tajmer na 00:00?",
     startNextMatchTitle: "Započni Novu Utakmicu",
-    startNextMatchMessage: "Ovo će resetovati rezultate, tajmer i sve statistike.",
+    startNextMatchMessage:
+      "Ovo će resetovati rezultate, tajmer i sve statistike.",
     keepTeamNames: "Zadrži trenutna imena timova",
     startNewMatch: "Započni Novu Utakmicu",
 
@@ -105,5 +107,5 @@ export const translations = {
     projectorMode: "Režim Projektora (Pritisnite",
     toToggleControls: "da uključite/isključite kontrole)",
     controls: "Kontrole",
-  }
+  },
 };
