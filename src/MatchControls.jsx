@@ -1,9 +1,12 @@
 import { useMatch } from './MatchContext';
+import { useTranslation } from './TranslationContext';
 import PeriodSelector from './PeriodSelector';
+import LanguageSelector from './LanguageSelector';
 import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw } from 'lucide-react';
 
 const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal }) => {
   const { matchState, toggleTimer, zoomLevel, setZoomLevel } = useMatch();
+  const { t } = useTranslation();
   const { timer } = matchState;
 
   const handleResetTimer = () => {
@@ -26,9 +29,12 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
   return (
     <div className="bg-steelBlue/30 rounded-xl p-4 md:p-6 flex flex-col gap-4">
-      <h3 className="font-heading text-2xl text-electricMint uppercase tracking-wider text-center">
-        Match Controls
-      </h3>
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="font-heading text-2xl text-electricMint uppercase tracking-wider flex-1 text-center">
+          {t('matchControls')}
+        </h3>
+        <LanguageSelector />
+      </div>
 
       <div className="font-mono text-4xl md:text-5xl text-electricMint text-center font-bold py-4">
         {formatTime(timer.minutes, timer.seconds)}
@@ -43,12 +49,12 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
           {timer.isRunning ? (
             <>
               <Pause className="w-4 h-4" />
-              Pause
+              {t('pause')}
             </>
           ) : (
             <>
               <Play className="w-4 h-4" />
-              Start
+              {t('start')}
             </>
           )}
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded text-white">
@@ -62,7 +68,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
           title="Reset timer (R)"
         >
           <RotateCcw className="w-4 h-4" />
-          Reset
+          {t('reset')}
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             R
           </span>
@@ -75,7 +81,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
       <div className="bg-broadcastNavy/30 rounded-lg p-4 mt-2">
         <div className="flex items-center justify-between mb-3">
           <label className="font-body text-sm text-electricMint font-semibold">
-            Scoreboard Size
+            {t('scoreboardSize')}
           </label>
           <span className="font-mono text-electricMint text-sm font-bold">
             {zoomLevel}%
@@ -102,7 +108,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
         title="Next match (N)"
       >
         <RefreshCw className="w-4 h-4" />
-        Next Match
+        {t('nextMatch')}
         <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
           N
         </span>
@@ -115,7 +121,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
           title="Toggle fullscreen (F)"
         >
           <Maximize className="w-4 h-4" />
-          Fullscreen
+          {t('fullscreen')}
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             F
           </span>
@@ -127,7 +133,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
           title="Projector mode (Tab)"
         >
           <Monitor className="w-4 h-4" />
-          Projector
+          {t('projector')}
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
             Tab
           </span>

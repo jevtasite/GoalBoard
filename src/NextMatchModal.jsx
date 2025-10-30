@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useMatch } from './MatchContext';
+import { useTranslation } from './TranslationContext';
 
 const NextMatchModal = ({ isOpen, onClose }) => {
   const [keepNames, setKeepNames] = useState(true);
   const [newTeamAName, setNewTeamAName] = useState('');
   const [newTeamBName, setNewTeamBName] = useState('');
   const { resetMatch, updateTeamName } = useMatch();
+  const { t } = useTranslation();
 
   if (!isOpen) return null;
 
@@ -38,11 +40,11 @@ const NextMatchModal = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
-          Start Next Match
+          {t('startNextMatchTitle')}
         </h2>
 
         <p className="font-body text-white mb-6">
-          This will reset scores, timer, and all statistics.
+          {t('startNextMatchMessage')}
         </p>
 
         <div className="mb-6">
@@ -54,7 +56,7 @@ const NextMatchModal = ({ isOpen, onClose }) => {
               className="w-5 h-5 accent-electricMint cursor-pointer"
             />
             <span className="font-body text-white group-hover:text-electricMint transition-colors">
-              Keep current team names
+              {t('keepTeamNames')}
             </span>
           </label>
         </div>
@@ -63,7 +65,7 @@ const NextMatchModal = ({ isOpen, onClose }) => {
           <div className="space-y-4 mb-6">
             <input
               type="text"
-              placeholder="Team A Name"
+              placeholder={t('teamANamePlaceholder')}
               value={newTeamAName}
               onChange={(e) => setNewTeamAName(e.target.value)}
               maxLength={20}
@@ -71,7 +73,7 @@ const NextMatchModal = ({ isOpen, onClose }) => {
             />
             <input
               type="text"
-              placeholder="Team B Name"
+              placeholder={t('teamBNamePlaceholder')}
               value={newTeamBName}
               onChange={(e) => setNewTeamBName(e.target.value)}
               maxLength={20}
@@ -85,13 +87,13 @@ const NextMatchModal = ({ isOpen, onClose }) => {
             onClick={handleCancel}
             className="flex-1 px-6 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body rounded-lg transition-all button-press"
           >
-            Cancel
+            {t('cancel')}
           </button>
           <button
             onClick={handleConfirm}
             className="flex-1 px-6 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press"
           >
-            Start New Match
+            {t('startNewMatch')}
           </button>
         </div>
       </div>

@@ -1,15 +1,25 @@
 import { useMatch } from './MatchContext';
+import { useTranslation } from './TranslationContext';
 
 const PeriodSelector = () => {
   const { matchState, updatePeriod } = useMatch();
+  const { t } = useTranslation();
 
   const periods = [
-    'First Half',
-    'Half Time',
-    'Second Half',
-    'Extra Time',
-    'Full Time'
+    { key: 'firstHalf', label: t('firstHalf'), value: 'First Half' },
+    { key: 'secondHalf', label: t('secondHalf'), value: 'Second Half' },
+    { key: 'extraTime', label: t('extraTime'), value: 'Extra Time' }
   ];
+
+  // Get current period display label
+  const getCurrentPeriodLabel = () => {
+    const periodMap = {
+      'First Half': t('firstHalf'),
+      'Second Half': t('secondHalf'),
+      'Extra Time': t('extraTime')
+    };
+    return periodMap[matchState.period] || matchState.period;
+  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -22,8 +32,8 @@ const PeriodSelector = () => {
         className="w-full px-4 py-3 bg-steelBlue text-white font-body rounded-lg border-2 border-steelBlue focus:border-electricMint focus:outline-none transition-all cursor-pointer"
       >
         {periods.map(period => (
-          <option key={period} value={period}>
-            {period}
+          <option key={period.key} value={period.value}>
+            {period.label}
           </option>
         ))}
       </select>

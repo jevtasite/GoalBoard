@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { MatchProvider, useMatch } from './MatchContext';
 import { AnimationProvider } from './AnimationContext';
+import { TranslationProvider, useTranslation } from './TranslationContext';
 import { useKeyboardShortcuts } from './useKeyboardShortcuts';
 import { useDeviceDetection } from './useDeviceDetection';
 import ScoreboardDisplay from './ScoreboardDisplay';
 import ControlPanel from './ControlPanel';
 import NextMatchModal from './NextMatchModal';
+import LanguageSelector from './LanguageSelector';
 import { Monitor } from 'lucide-react';
 
 function AppContent() {
@@ -14,6 +16,7 @@ function AppContent() {
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
   const { resetTimer } = useMatch();
   const { isMobileDevice, isPortrait, isPhone } = useDeviceDetection();
+  const { t } = useTranslation();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
 
   const confirmResetTimer = () => {
@@ -24,6 +27,11 @@ function AppContent() {
   return (
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
       <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} />
+
+      {/* Language Selector for mobile devices */}
+      {isMobileDevice && !presentationMode && (
+        <LanguageSelector isMobile={true} />
+      )}
 
       {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
       {!presentationMode && !isMobileDevice && (
@@ -36,7 +44,7 @@ function AppContent() {
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-electricMint/20 backdrop-blur-sm border-2 border-electricMint px-4 py-2 rounded-lg">
             <p className="font-body text-electricMint text-sm font-semibold flex items-center gap-2">
               <Monitor className="w-4 h-4" />
-              Projector Mode (Press <kbd className="px-2 py-1 bg-electricMint/30 rounded">Tab</kbd> to toggle controls)
+              {t('projectorMode')} <kbd className="px-2 py-1 bg-electricMint/30 rounded">Tab</kbd> {t('toToggleControls')}
             </p>
           </div>
           {/* Hover trigger area */}
@@ -55,11 +63,11 @@ function AppContent() {
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
-              Reset Timer?
+              {t('resetTimerTitle')}
             </h2>
 
             <p className="font-body text-white mb-6">
-              Are you sure you want to reset the timer to 00:00?
+              {t('resetTimerMessage')}
             </p>
 
             <div className="flex gap-4">
@@ -67,13 +75,13 @@ function AppContent() {
                 onClick={() => setShowResetConfirmModal(false)}
                 className="flex-1 px-6 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body rounded-lg transition-all button-press"
               >
-                Cancel
+                {t('cancel')}
               </button>
               <button
                 onClick={confirmResetTimer}
                 className="flex-1 px-6 py-3 bg-broadcastRed hover:bg-broadcastRed/80 text-white font-body font-semibold rounded-lg transition-all button-press"
               >
-                Reset Timer
+                {t('reset')}
               </button>
             </div>
           </div>
@@ -91,11 +99,13 @@ function AppContent() {
 
 function App() {
   return (
-    <MatchProvider>
-      <AnimationProvider>
-        <AppContent />
-      </AnimationProvider>
-    </MatchProvider>
+    <TranslationProvider>
+      <MatchProvider>
+        <AnimationProvider>
+          <AppContent />
+        </AnimationProvider>
+      </MatchProvider>
+    </TranslationProvider>
   );
 }
 

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useMatch } from './MatchContext';
+import { useTranslation } from './TranslationContext';
 import { Pencil } from 'lucide-react';
 
 const NameEditor = ({ team, currentName }) => {
   const [editing, setEditing] = useState(false);
   const [tempName, setTempName] = useState(currentName);
   const { updateTeamName } = useMatch();
+  const { t } = useTranslation();
 
   const handleSave = () => {
     if (tempName.trim()) {
@@ -44,7 +46,7 @@ const NameEditor = ({ team, currentName }) => {
       className="w-full px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body rounded-lg transition-all button-press flex items-center justify-center gap-2"
     >
       <Pencil className="w-4 h-4" />
-      Edit Name
+      {t('editName')}
     </button>
   );
 };
