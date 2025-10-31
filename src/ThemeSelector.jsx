@@ -18,8 +18,8 @@ const ThemeSelector = ({ isMobile = false }) => {
   };
 
   const buttonClasses = isMobile
-    ? "flex items-center justify-center w-12 h-12 bg-steelBlue/90 hover:bg-steelBlue text-white rounded-lg transition-all shadow-lg backdrop-blur-sm border border-electricMint/30"
-    : "flex items-center gap-2 px-3 py-2 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press";
+    ? "flex items-center justify-center w-14 h-14 bg-steelBlue/90 hover:bg-steelBlue text-white rounded-lg transition-all shadow-lg backdrop-blur-sm border border-electricMint/30"
+    : "flex items-center gap-2 px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press";
 
   return (
     <>
@@ -31,7 +31,7 @@ const ThemeSelector = ({ isMobile = false }) => {
             className={buttonClasses}
             title="Change theme"
           >
-            <Palette className="w-5 h-5" />
+            <Palette className="w-6 h-6" />
           </button>
         </div>
       ) : (
@@ -40,7 +40,7 @@ const ThemeSelector = ({ isMobile = false }) => {
           className={buttonClasses}
           title="Change theme"
         >
-          <Palette className="w-4 h-4" />
+          <Palette className="w-5 h-5" />
         </button>
       )}
 

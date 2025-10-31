@@ -17,10 +17,12 @@ function AppContent() {
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
-  const { resetTimer } = useMatch();
+  const { resetTimer, matchState } = useMatch();
   const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
   const { t } = useTranslation();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
+
+  const isTimerRunning = matchState.timer.isRunning;
 
   const confirmResetTimer = () => {
     resetTimer();
@@ -31,20 +33,26 @@ function AppContent() {
     <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
       <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
 
-      {/* Language Selector for mobile devices */}
-      {isMobileDevice && !presentationMode && (
-        <LanguageSelector isMobile={true} />
-      )}
+      {/* Language Selector for mobile devices - hide when timer is running */}
+      <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        {isMobileDevice && !presentationMode && (
+          <LanguageSelector isMobile={true} />
+        )}
+      </div>
 
-      {/* Theme Selector for mobile devices */}
-      {isMobileDevice && !presentationMode && (
-        <ThemeSelector isMobile={true} />
-      )}
+      {/* Theme Selector for mobile devices - hide when timer is running */}
+      <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        {isMobileDevice && !presentationMode && (
+          <ThemeSelector isMobile={true} />
+        )}
+      </div>
 
-      {/* Developer Credit */}
-      {!presentationMode && (
-        <DeveloperCredit isMobileDevice={isMobileDevice} />
-      )}
+      {/* Developer Credit - hide on mobile when timer is running */}
+      <div className={`transition-opacity duration-300 ${!presentationMode && !(isMobileDevice && isTimerRunning) ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        {!presentationMode && (
+          <DeveloperCredit isMobileDevice={isMobileDevice} />
+        )}
+      </div>
 
       {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
       {!presentationMode && !isMobileDevice && (

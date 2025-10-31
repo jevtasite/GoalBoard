@@ -4,7 +4,7 @@ export const themes = {
     colors: {
       // Background
       background: '#0A1628',
-      // Primary accent
+      // Primary accent (UI elements)
       primary: '#00FF87',
       primaryHover: '#00E67A',
       primaryActive: '#00CC6D',
@@ -16,6 +16,8 @@ export const themes = {
       // Team colors
       teamA: '#00FF87',
       teamB: '#FF2D55',
+      // Team name color
+      teamNameColor: '#FF2D55',
     }
   },
   ocean: {
@@ -30,6 +32,7 @@ export const themes = {
       slate: '#7FB3D5',
       teamA: '#00D9FF',
       teamB: '#FF6B9D',
+      teamNameColor: '#00D9FF',
     }
   },
   sunset: {
@@ -44,6 +47,7 @@ export const themes = {
       slate: '#B8A3D6',
       teamA: '#FF6B35',
       teamB: '#FFD23F',
+      teamNameColor: '#FF6B35',
     }
   },
   forest: {
@@ -58,6 +62,7 @@ export const themes = {
       slate: '#A8D5A8',
       teamA: '#7FFF00',
       teamB: '#FF4500',
+      teamNameColor: '#7FFF00',
     }
   },
   midnight: {
@@ -72,6 +77,7 @@ export const themes = {
       slate: '#B8A8D6',
       teamA: '#9D4EDD',
       teamB: '#FF006E',
+      teamNameColor: '#9D4EDD',
     }
   },
   neon: {
@@ -86,6 +92,7 @@ export const themes = {
       slate: '#00FFFF',
       teamA: '#00FFFF',
       teamB: '#FF00FF',
+      teamNameColor: '#00FFFF',
     }
   },
   royal: {
@@ -100,6 +107,7 @@ export const themes = {
       slate: '#D4AF37',
       teamA: '#FFD700',
       teamB: '#9B59B6',
+      teamNameColor: '#FFD700',
     }
   },
   ice: {
@@ -114,6 +122,7 @@ export const themes = {
       slate: '#B3E5FC',
       teamA: '#E0F7FF',
       teamB: '#4FC3F7',
+      teamNameColor: '#E0F7FF',
     }
   },
   dark: {
@@ -128,20 +137,22 @@ export const themes = {
       slate: '#999999',
       teamA: '#FFFFFF',
       teamB: '#666666',
+      teamNameColor: '#FFFFFF',
     }
   },
-  serbia: {
-    name: 'Serbia',
+  patriot: {
+    name: 'Patriot',
     colors: {
-      background: '#0D1621',
-      primary: '#C6363C',
-      primaryHover: '#B32D33',
-      primaryActive: '#A0242A',
-      secondary: '#0C4076',
-      steel: '#1E2F47',
-      slate: '#8B9DC3',
+      background: '#1A1D2E',
+      primary: '#F0F0F0',
+      primaryHover: '#FFFFFF',
+      primaryActive: '#E0E0E0',
+      secondary: '#C6363C',
+      steel: '#4169B5',
+      slate: '#D4D4D4',
       teamA: '#C6363C',
-      teamB: '#0C4076',
+      teamB: '#4169B5',
+      teamNameColor: '#F0F0F0',
     }
   },
 };

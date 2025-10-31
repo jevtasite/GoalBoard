@@ -19,7 +19,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
 
   // Team-specific colors from theme
   const themeColors = themes[currentTheme].colors;
-  const teamColor = themeColors.primary; // Both teams use primary color for name
+  const teamColor = themeColors.teamNameColor || themeColors.primary; // Both teams use teamNameColor for name
   const scoreGlowColor = team === 'teamA' ? themeColors.teamA : themeColors.teamB; // Score glow uses team colors
 
   // Convert hex to RGB for glow effect

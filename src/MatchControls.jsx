@@ -106,12 +106,12 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
       <button
         onClick={() => setShowNextMatchModal(true)}
-        className="relative w-full px-4 py-3 bg-goalGreen hover:bg-goalGreen/80 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg mt-2 flex items-center justify-center gap-2"
+        className="relative w-full px-4 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg mt-2 flex items-center justify-center gap-2"
         title="Next match (N)"
       >
         <RefreshCw className="w-4 h-4" />
         {t('nextMatch')}
-        <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded">
+        <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded text-white">
           N
         </span>
       </button>
@@ -131,7 +131,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
 
         <button
           onClick={() => setPresentationMode(true)}
-          className="relative flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg flex items-center justify-center gap-2"
+          className="relative flex-1 px-4 py-3 bg-broadcastRed hover:bg-broadcastRed/80 text-white font-body font-semibold rounded-lg transition-all button-press shadow-lg flex items-center justify-center gap-2"
           title="Projector mode (Tab)"
         >
           <Monitor className="w-4 h-4" />
