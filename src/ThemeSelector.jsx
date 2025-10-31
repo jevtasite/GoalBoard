@@ -1,11 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useTheme } from './ThemeContext';
-import { Palette, ChevronDown } from 'lucide-react';
+import { Palette, Check, X } from 'lucide-react';
 
 const ThemeSelector = ({ isMobile = false }) => {
   const { currentTheme, changeTheme, themes } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const themeList = Object.entries(themes).map(([key, theme]) => ({
     key,
@@ -13,94 +12,99 @@ const ThemeSelector = ({ isMobile = false }) => {
     colors: theme.colors
   }));
 
-  const currentThemeData = themes[currentTheme];
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   const handleThemeSelect = (themeKey) => {
     changeTheme(themeKey);
     setIsOpen(false);
   };
 
-  if (isMobile) {
-    return (
-      <div ref={dropdownRef} className="fixed top-4 left-4 z-50">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-2 bg-steelBlue/90 hover:bg-steelBlue text-white font-body font-semibold rounded-lg transition-all shadow-lg backdrop-blur-sm border border-electricMint/30"
-        >
-          <Palette className="w-5 h-5" />
-          <span>{currentThemeData.name}</span>
-          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-        </button>
-
-        {isOpen && (
-          <div className="absolute top-full left-0 mt-2 bg-steelBlue rounded-lg shadow-2xl border-2 border-electricMint/30 overflow-hidden min-w-[180px]">
-            {themeList.map((theme) => (
-              <button
-                key={theme.key}
-                onClick={() => handleThemeSelect(theme.key)}
-                className={`w-full px-4 py-3 font-body transition-colors text-left flex items-center gap-3 ${
-                  theme.key === currentTheme
-                    ? 'bg-electricMint text-broadcastNavy font-semibold'
-                    : 'text-white hover:bg-steelBlue/80'
-                }`}
-              >
-                <div className="flex gap-1">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: theme.colors.teamA }}></div>
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: theme.colors.teamB }}></div>
-                </div>
-                <span>{theme.name}</span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
+  const buttonClasses = isMobile
+    ? "flex items-center justify-center w-12 h-12 bg-steelBlue/90 hover:bg-steelBlue text-white rounded-lg transition-all shadow-lg backdrop-blur-sm border border-electricMint/30"
+    : "flex items-center gap-2 px-3 py-2 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press";
 
   return (
-    <div ref={dropdownRef} className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
-      >
-        <Palette className="w-4 h-4" />
-        <span>{currentThemeData.name}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
+    <>
+      {/* Trigger Button */}
+      {isMobile ? (
+        <div className="fixed top-4 left-4 z-50">
+          <button
+            onClick={() => setIsOpen(true)}
+            className={buttonClasses}
+            title="Change theme"
+          >
+            <Palette className="w-5 h-5" />
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className={buttonClasses}
+          title="Change theme"
+        >
+          <Palette className="w-4 h-4" />
+        </button>
+      )}
 
+      {/* Modal Overlay */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 bg-steelBlue rounded-lg shadow-2xl border-2 border-electricMint/30 overflow-hidden min-w-[180px] z-50">
-          {themeList.map((theme) => (
-            <button
-              key={theme.key}
-              onClick={() => handleThemeSelect(theme.key)}
-              className={`w-full px-4 py-3 font-body transition-colors text-left flex items-center gap-3 ${
-                theme.key === currentTheme
-                  ? 'bg-electricMint text-broadcastNavy font-semibold'
-                  : 'text-white hover:bg-steelBlue/80'
-              }`}
-            >
-              <div className="flex gap-1">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: theme.colors.teamA }}></div>
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: theme.colors.teamB }}></div>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          {/* Modal Content */}
+          <div className="bg-steelBlue rounded-xl shadow-2xl border-2 border-electricMint/30 w-full max-w-md animate-in fade-in zoom-in duration-200">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-electricMint/20">
+              <div className="flex items-center gap-3">
+                <Palette className="w-6 h-6 text-electricMint" />
+                <h3 className="font-heading text-xl text-electricMint uppercase tracking-wider">
+                  Choose Theme
+                </h3>
               </div>
-              <span>{theme.name}</span>
-            </button>
-          ))}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-1 hover:bg-electricMint/20 rounded-lg transition-colors"
+                title="Close"
+              >
+                <X className="w-5 h-5 text-white" />
+              </button>
+            </div>
+
+            {/* Theme Grid */}
+            <div className="p-5">
+              <div className="grid grid-cols-2 gap-3">
+                {themeList.map((theme) => (
+                  <button
+                    key={theme.key}
+                    onClick={() => handleThemeSelect(theme.key)}
+                    className={`relative p-4 rounded-lg transition-all ${
+                      theme.key === currentTheme
+                        ? 'bg-electricMint/20 border-2 border-electricMint shadow-lg shadow-electricMint/20'
+                        : 'bg-broadcastNavy/50 border-2 border-transparent hover:border-electricMint/50 hover:shadow-md'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <div
+                        className="w-5 h-5 rounded-full border-2 border-white/30"
+                        style={{ backgroundColor: theme.colors.teamA }}
+                      ></div>
+                      <div
+                        className="w-5 h-5 rounded-full border-2 border-white/30"
+                        style={{ backgroundColor: theme.colors.teamB }}
+                      ></div>
+                    </div>
+                    <div className="text-sm font-body font-semibold text-white text-left">
+                      {theme.name}
+                    </div>
+                    {theme.key === currentTheme && (
+                      <div className="absolute top-2 right-2 bg-electricMint rounded-full p-0.5">
+                        <Check className="w-3 h-3 text-broadcastNavy" />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -116,6 +116,34 @@ export const themes = {
       teamB: '#4FC3F7',
     }
   },
+  dark: {
+    name: 'Dark',
+    colors: {
+      background: '#0D0D0D',
+      primary: '#FFFFFF',
+      primaryHover: '#E6E6E6',
+      primaryActive: '#CCCCCC',
+      secondary: '#666666',
+      steel: '#1A1A1A',
+      slate: '#999999',
+      teamA: '#FFFFFF',
+      teamB: '#666666',
+    }
+  },
+  serbia: {
+    name: 'Serbia',
+    colors: {
+      background: '#0D1621',
+      primary: '#C6363C',
+      primaryHover: '#B32D33',
+      primaryActive: '#A0242A',
+      secondary: '#0C4076',
+      steel: '#1E2F47',
+      slate: '#8B9DC3',
+      teamA: '#C6363C',
+      teamB: '#0C4076',
+    }
+  },
 };
 
 export const applyTheme = (theme) => {

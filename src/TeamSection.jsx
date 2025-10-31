@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAnimations } from './AnimationContext';
 import { useMatch } from './MatchContext';
+import { useTheme } from './ThemeContext';
 import CardIndicators from './CardIndicators';
 import { Pencil, Check, X } from 'lucide-react';
 
@@ -8,6 +9,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
   const { animations } = useAnimations();
   const { updateScore, updateTeamName } = useMatch();
   const { triggerGoalCelebration } = useAnimations();
+  const { currentTheme, themes } = useTheme();
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(teamData.name);
 
@@ -15,10 +17,17 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
   const isRedCardEffect = animations.redCardEffect.active && animations.redCardEffect.team === team;
   const isPulseActive = animations.goalCelebration.active && animations.goalCelebration.team === team;
 
-  // Team-specific colors
-  const teamColor = team === 'teamA' ? '#00FF87' : '#FF2D55';
-  const glowColor = team === 'teamA' ? '#00FF87' : '#FF2D55';
-  const glowColorRgba = team === 'teamA' ? '0, 255, 135' : '255, 45, 85';
+  // Team-specific colors from theme
+  const themeColors = themes[currentTheme].colors;
+  const teamColor = themeColors.primary; // Both teams use primary color for name
+  const scoreGlowColor = team === 'teamA' ? themeColors.teamA : themeColors.teamB; // Score glow uses team colors
+
+  // Convert hex to RGB for glow effect
+  const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '0, 0, 0';
+  };
+  const glowColorRgba = hexToRgb(scoreGlowColor);
 
   const scoreStyle = {
     textShadow: isPulseActive ? `
@@ -69,7 +78,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
               if (e.key === 'Escape') handleCancelEdit();
             }}
             maxLength={20}
-            className={`flex-1 ${isPhone ? 'max-w-[250px] text-2xl px-4 py-3' : 'max-w-[200px] md:max-w-[300px] text-lg md:text-3xl px-3 md:px-4 py-2 md:py-3'} bg-steelBlue/50 border-2 border-electricMint text-white font-heading text-center rounded-lg focus:outline-none uppercase`}
+            className={`flex-1 ${isPhone ? 'max-w-[250px] text-2xl px-4 py-3' : 'max-w-[200px] md:max-w-[300px] text-lg md:text-3xl px-3 md:px-4 py-2 md:py-3'} bg-broadcastNavy border-2 border-electricMint text-electricMint font-heading text-center rounded-lg focus:outline-none focus:bg-broadcastNavy/90 uppercase`}
             autoFocus
           />
         </div>

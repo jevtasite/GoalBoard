@@ -5,7 +5,8 @@
       "Bash(npm install)",
       "Bash(npm run dev:*)",
       "Bash(npm install:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

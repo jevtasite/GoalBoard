@@ -35,7 +35,7 @@ const NameEditor = ({ team, currentName }) => {
         onBlur={handleSave}
         maxLength={20}
         autoFocus
-        className="w-full px-4 py-3 bg-steelBlue/50 border-2 border-electricMint text-white font-body rounded-lg focus:outline-none"
+        className="w-full px-4 py-3 bg-broadcastNavy border-2 border-electricMint text-electricMint font-body rounded-lg focus:outline-none focus:bg-broadcastNavy/90"
       />
     );
   }
