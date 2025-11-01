@@ -56,6 +56,7 @@ function AppContent() {
         // Exiting presentation mode - show and slide up
         setShouldApplyPadding(true); // Apply padding immediately
         setIsControlPanelVisible(true);
+        setIsAnimatingOut(false); // Reset animation state to prevent race condition
       }
     }
   }, [presentationMode, isMobileDevice]);
