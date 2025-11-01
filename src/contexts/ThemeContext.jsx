@@ -21,6 +21,11 @@ export const ThemeProvider = ({ children }) => {
     return "dark";
   });
 
+  const [backgroundStyle, setBackgroundStyle] = useState(() => {
+    const saved = localStorage.getItem("goalboard-background-style");
+    return saved || "stadium";
+  });
+
   useEffect(() => {
     const theme = themes[currentTheme];
     if (theme) {
@@ -32,14 +37,22 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [currentTheme]);
 
+  useEffect(() => {
+    localStorage.setItem("goalboard-background-style", backgroundStyle);
+  }, [backgroundStyle]);
+
   const changeTheme = (themeName) => {
     if (themes[themeName]) {
       setCurrentTheme(themeName);
     }
   };
 
+  const changeBackgroundStyle = (styleName) => {
+    setBackgroundStyle(styleName);
+  };
+
   return (
-    <ThemeContext.Provider value={{ currentTheme, changeTheme, themes }}>
+    <ThemeContext.Provider value={{ currentTheme, changeTheme, themes, backgroundStyle, changeBackgroundStyle }}>
       {children}
     </ThemeContext.Provider>
   );

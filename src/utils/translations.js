@@ -56,6 +56,17 @@ export const translations = {
     toToggleControls: "to toggle controls)",
     controls: "Controls",
     selectLanguage: "Select Language",
+
+    // Theme Customization
+    customize: "Customize",
+    colorTheme: "Color Theme",
+    background: "Background",
+    stadiumGrid: "Stadium Grid",
+    hexagons: "Hexagons",
+    dots: "Dots",
+    diagonal: "Diagonal",
+    circuit: "Circuit",
+    none: "None",
   },
 
   sr: {
@@ -117,6 +128,17 @@ export const translations = {
     toToggleControls: "da uključite/isključite kontrole)",
     controls: "Kontrole",
     selectLanguage: "Izaberite Jezik",
+
+    // Theme Customization
+    customize: "Prilagodi",
+    colorTheme: "Šema Boja",
+    background: "Pozadina",
+    stadiumGrid: "Stadionska Mreža",
+    hexagons: "Heksagoni",
+    dots: "Tačke",
+    diagonal: "Dijagonale",
+    circuit: "Kolo",
+    none: "Bez Pozadine",
   },
 
   es: {
@@ -176,6 +198,17 @@ export const translations = {
     toToggleControls: "para alternar controles)",
     controls: "Controles",
     selectLanguage: "Seleccionar Idioma",
+
+    // Theme Customization
+    customize: "Personalizar",
+    colorTheme: "Tema de Color",
+    background: "Fondo",
+    stadiumGrid: "Cuadrícula de Estadio",
+    hexagons: "Hexágonos",
+    dots: "Puntos",
+    diagonal: "Diagonal",
+    circuit: "Circuito",
+    none: "Ninguno",
   },
 
   pt: {
@@ -235,5 +268,16 @@ export const translations = {
     toToggleControls: "para alternar controles)",
     controls: "Controles",
     selectLanguage: "Selecionar Idioma",
+
+    // Theme Customization
+    customize: "Personalizar",
+    colorTheme: "Tema de Cor",
+    background: "Fundo",
+    stadiumGrid: "Grade de Estádio",
+    hexagons: "Hexágonos",
+    dots: "Pontos",
+    diagonal: "Diagonal",
+    circuit: "Circuito",
+    none: "Nenhum",
   },
 };
