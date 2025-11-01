@@ -5,7 +5,7 @@ import LanguageSelector from '../selectors/LanguageSelector';
 import ThemeSelector from '../selectors/ThemeSelector';
 import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw, Clock } from 'lucide-react';
 
-const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal, setShowSetTimeModal }) => {
+const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal, setShowSetTimeModal, setShowLanguageModal }) => {
   const { matchState, toggleTimer, zoomLevel, setZoomLevel } = useMatch();
   const { t } = useTranslation();
   const { timer } = matchState;
@@ -35,7 +35,7 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
         <h3 className="font-heading text-2xl text-electricMint uppercase tracking-wider flex-1 text-center">
           {t('matchControls')}
         </h3>
-        <LanguageSelector />
+        <LanguageSelector setShowLanguageModal={setShowLanguageModal} />
       </div>
 
       <div className="font-mono text-4xl md:text-5xl text-electricMint text-center font-bold py-4">

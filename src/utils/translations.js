@@ -55,6 +55,7 @@ export const translations = {
     projectorMode: "Projector Mode (Press",
     toToggleControls: "to toggle controls)",
     controls: "Controls",
+    selectLanguage: "Select Language",
   },
 
   sr: {
@@ -115,6 +116,7 @@ export const translations = {
     projectorMode: "Režim Projektora (Pritisnite",
     toToggleControls: "da uključite/isključite kontrole)",
     controls: "Kontrole",
+    selectLanguage: "Izaberite Jezik",
   },
 
   es: {
@@ -173,6 +175,7 @@ export const translations = {
     projectorMode: "Modo Proyector (Presiona",
     toToggleControls: "para alternar controles)",
     controls: "Controles",
+    selectLanguage: "Seleccionar Idioma",
   },
 
   pt: {
@@ -231,5 +234,6 @@ export const translations = {
     projectorMode: "Modo Projetor (Pressione",
     toToggleControls: "para alternar controles)",
     controls: "Controles",
+    selectLanguage: "Selecionar Idioma",
   },
 };

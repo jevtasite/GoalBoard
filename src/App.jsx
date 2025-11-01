@@ -18,6 +18,7 @@ function AppContent() {
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
   const [showSetTimeModal, setShowSetTimeModal] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [customMinutes, setCustomMinutes] = useState('');
   const [customSeconds, setCustomSeconds] = useState('');
   const [isControlPanelVisible, setIsControlPanelVisible] = useState(true);
@@ -25,7 +26,7 @@ function AppContent() {
   const [shouldApplyPadding, setShouldApplyPadding] = useState(true);
   const { resetTimer, setTimerTime, matchState } = useMatch();
   const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
 
   const isTimerRunning = matchState.timer.isRunning;
@@ -43,6 +44,18 @@ function AppContent() {
     setCustomMinutes('');
     setCustomSeconds('');
   };
+
+  const handleLanguageSelect = (code) => {
+    setLanguage(code);
+    setShowLanguageModal(false);
+  };
+
+  const languages = [
+    { code: 'en', name: 'English', flagCode: 'gb' },
+    { code: 'sr', name: 'Srpski', flagCode: 'rs' },
+    { code: 'es', name: 'Español', flagCode: 'es' },
+    { code: 'pt', name: 'Português', flagCode: 'pt' }
+  ];
 
   // Initialize states based on device type on mount
   useEffect(() => {
@@ -91,7 +104,7 @@ function AppContent() {
         {/* Language Selector for mobile devices - hide when timer is running */}
         <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           {isMobileDevice && !presentationMode && (
-            <LanguageSelector isMobile={true} />
+            <LanguageSelector isMobile={true} setShowLanguageModal={setShowLanguageModal} />
           )}
         </div>
 
@@ -120,6 +133,7 @@ function AppContent() {
             showNextMatchModal={showNextMatchModal}
             setShowNextMatchModal={setShowNextMatchModal}
             setShowSetTimeModal={setShowSetTimeModal}
+            setShowLanguageModal={setShowLanguageModal}
           />
         </div>
       )}
@@ -248,6 +262,40 @@ function AppContent() {
               >
                 {t('setTime')}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Language Selection Modal - always accessible even in Projector Mode */}
+      {showLanguageModal && (
+        <div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowLanguageModal(false)}
+        >
+          <div
+            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
+              {t('selectLanguage')}
+            </h2>
+
+            <div className="flex flex-col gap-2">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLanguageSelect(lang.code)}
+                  className={`w-full px-6 py-4 font-body transition-colors text-left flex items-center gap-4 rounded-lg ${
+                    lang.code === language
+                      ? 'bg-electricMint text-broadcastNavy font-semibold'
+                      : 'bg-steelBlue text-white hover:bg-steelBlue/80'
+                  }`}
+                >
+                  <span className={`fi fi-${lang.flagCode} text-2xl`}></span>
+                  <span className="text-lg">{lang.name}</span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
