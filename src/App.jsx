@@ -44,12 +44,12 @@ function AppContent() {
   useEffect(() => {
     if (!isMobileDevice) {
       if (presentationMode) {
-        // Entering presentation mode - slide down then hide
+        // Entering presentation mode - remove padding immediately so content moves with panel
+        setShouldApplyPadding(false);
         setIsAnimatingOut(true);
         const timer = setTimeout(() => {
           setIsControlPanelVisible(false);
           setIsAnimatingOut(false);
-          setShouldApplyPadding(false); // Remove padding after animation
         }, 300); // Match animation duration
         return () => clearTimeout(timer);
       } else {
