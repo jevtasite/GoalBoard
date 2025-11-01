@@ -4,7 +4,7 @@ import { useTranslation } from '../../contexts/TranslationContext';
 import NameEditor from '../selectors/NameEditor';
 import ScoreButtons from './ScoreButtons';
 import StatControl from './StatControl';
-import { SquareX } from 'lucide-react';
+import { RectangleVertical } from 'lucide-react';
 
 const TeamControls = ({ team }) => {
   const { matchState, updateCards, updateStats } = useMatch();
@@ -31,7 +31,7 @@ const TeamControls = ({ team }) => {
         <StatControl
           label={t('yellowCards')}
           value={teamData.yellowCards}
-          icon={<SquareX className="w-4 h-4 text-yellow-400" />}
+          icon={<RectangleVertical className="w-4 h-4 text-yellow-400 fill-yellow-400" />}
           onIncrement={() => updateCards(team, 'yellowCards', 1)}
           onDecrement={() => updateCards(team, 'yellowCards', -1)}
         />
@@ -39,7 +39,7 @@ const TeamControls = ({ team }) => {
         <StatControl
           label={t('redCards')}
           value={teamData.redCards}
-          icon={<SquareX className="w-4 h-4 text-broadcastRed" />}
+          icon={<RectangleVertical className="w-4 h-4 text-red-500 fill-red-500" />}
           onIncrement={handleRedCardIncrement}
           onDecrement={() => updateCards(team, 'redCards', -1)}
         />
