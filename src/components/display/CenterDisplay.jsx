@@ -57,7 +57,7 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandsca
 
       {/* Mobile timer control buttons - only visible on mobile devices */}
       {isMobileDevice && (
-        <div className={`flex items-center ${isPhoneLandscape ? 'gap-2 mb-1' : isPhone ? 'gap-3 mb-3' : 'gap-2 md:gap-3 mb-2 md:mb-4'}`}>
+        <div className={`flex items-center justify-center ${isPhoneLandscape ? 'gap-2 mb-1' : isPhone ? 'gap-3 mb-3' : 'gap-2 md:gap-3 mb-2 md:mb-4'}`}>
           <button
             onClick={toggleTimer}
             className={`${isPhoneLandscape ? 'px-4 py-2 text-sm' : isPhone ? 'px-7 py-3 text-lg' : 'px-5 md:px-8 py-2 md:py-4 text-sm md:text-xl'} bg-electricMint hover:bg-electricMint/80 active:bg-electricMint/60 text-broadcastNavy font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
@@ -74,20 +74,24 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandsca
               </>
             )}
           </button>
-          <button
-            onClick={() => setShowSetTimeModal && setShowSetTimeModal(true)}
-            className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
-            title={t('setTimer')}
-          >
-            <Clock className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
-          </button>
-          <button
-            onClick={() => setShowResetConfirmModal && setShowResetConfirmModal(true)}
-            className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
-            title={t('reset')}
-          >
-            <RotateCcw className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
-          </button>
+          {!timer.isRunning && (
+            <>
+              <button
+                onClick={() => setShowSetTimeModal && setShowSetTimeModal(true)}
+                className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
+                title={t('setTimer')}
+              >
+                <Clock className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
+              </button>
+              <button
+                onClick={() => setShowResetConfirmModal && setShowResetConfirmModal(true)}
+                className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
+                title={t('reset')}
+              >
+                <RotateCcw className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
+              </button>
+            </>
+          )}
         </div>
       )}
 
