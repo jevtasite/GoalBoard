@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTheme } from './ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { Palette, Check, X } from 'lucide-react';
 
 const ThemeSelector = ({ isMobile = false }) => {

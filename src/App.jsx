@@ -1,22 +1,24 @@
-import { useState } from 'react';
-import { MatchProvider, useMatch } from './MatchContext';
-import { AnimationProvider } from './AnimationContext';
-import { TranslationProvider, useTranslation } from './TranslationContext';
-import { ThemeProvider } from './ThemeContext';
-import { useKeyboardShortcuts } from './useKeyboardShortcuts';
-import { useDeviceDetection } from './useDeviceDetection';
-import ScoreboardDisplay from './ScoreboardDisplay';
-import ControlPanel from './ControlPanel';
-import NextMatchModal from './NextMatchModal';
-import LanguageSelector from './LanguageSelector';
-import ThemeSelector from './ThemeSelector';
-import DeveloperCredit from './DeveloperCredit';
+import { useState, useEffect } from 'react';
+import { MatchProvider, useMatch } from './contexts/MatchContext';
+import { AnimationProvider } from './contexts/AnimationContext';
+import { TranslationProvider, useTranslation } from './contexts/TranslationContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { useDeviceDetection } from './hooks/useDeviceDetection';
+import ScoreboardDisplay from './components/display/ScoreboardDisplay';
+import ControlPanel from './components/controls/ControlPanel';
+import NextMatchModal from './components/modals/NextMatchModal';
+import LanguageSelector from './components/selectors/LanguageSelector';
+import ThemeSelector from './components/selectors/ThemeSelector';
+import DeveloperCredit from './components/misc/DeveloperCredit';
 import { Monitor } from 'lucide-react';
 
 function AppContent() {
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
+  const [isControlPanelVisible, setIsControlPanelVisible] = useState(true);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const { resetTimer, matchState } = useMatch();
   const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
   const { t } = useTranslation();
@@ -29,34 +31,57 @@ function AppContent() {
     setShowResetConfirmModal(false);
   };
 
+  // Handle control panel animation when presentation mode changes
+  useEffect(() => {
+    if (!isMobileDevice) {
+      if (presentationMode) {
+        // Entering presentation mode - slide down then hide
+        setIsAnimatingOut(true);
+        const timer = setTimeout(() => {
+          setIsControlPanelVisible(false);
+          setIsAnimatingOut(false);
+        }, 300); // Match animation duration
+        return () => clearTimeout(timer);
+      } else {
+        // Exiting presentation mode - show and slide up
+        setIsControlPanelVisible(true);
+      }
+    }
+  }, [presentationMode, isMobileDevice]);
+
   return (
-    <div className="min-h-screen flex flex-col bg-broadcastNavy overflow-hidden">
-      <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
+    <div className="min-h-screen bg-broadcastNavy overflow-hidden relative">
+      {/* Scoreboard - full screen on desktop, adjusts on mobile */}
+      <div className={isMobileDevice ? 'flex flex-col' : 'h-screen'}>
+        <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
 
-      {/* Language Selector for mobile devices - hide when timer is running */}
-      <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {isMobileDevice && !presentationMode && (
-          <LanguageSelector isMobile={true} />
-        )}
+        {/* Language Selector for mobile devices - hide when timer is running */}
+        <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          {isMobileDevice && !presentationMode && (
+            <LanguageSelector isMobile={true} />
+          )}
+        </div>
+
+        {/* Theme Selector for mobile devices - hide when timer is running */}
+        <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          {isMobileDevice && !presentationMode && (
+            <ThemeSelector isMobile={true} />
+          )}
+        </div>
+
+        {/* Developer Credit - hide on mobile when timer is running */}
+        <div className={`transition-opacity duration-300 ${!presentationMode && !(isMobileDevice && isTimerRunning) ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          {!presentationMode && (
+            <DeveloperCredit isMobileDevice={isMobileDevice} />
+          )}
+        </div>
       </div>
 
-      {/* Theme Selector for mobile devices - hide when timer is running */}
-      <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {isMobileDevice && !presentationMode && (
-          <ThemeSelector isMobile={true} />
-        )}
-      </div>
-
-      {/* Developer Credit - hide on mobile when timer is running */}
-      <div className={`transition-opacity duration-300 ${!presentationMode && !(isMobileDevice && isTimerRunning) ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {!presentationMode && (
-          <DeveloperCredit isMobileDevice={isMobileDevice} />
-        )}
-      </div>
-
-      {/* Hide control panel on mobile devices (phones and tablets), show on desktops */}
-      {!presentationMode && !isMobileDevice && (
-        <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />
+      {/* Control panel slides up from bottom on desktop - absolutely positioned */}
+      {!isMobileDevice && isControlPanelVisible && (
+        <div className={`fixed bottom-0 left-0 right-0 z-40 ${isAnimatingOut ? 'slide-down' : 'slide-up'}`}>
+          <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />
+        </div>
       )}
 
       {/* Projector Mode Indicator - visible on hover */}

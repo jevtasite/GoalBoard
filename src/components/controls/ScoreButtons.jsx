@@ -1,9 +1,11 @@
-import { useMatch } from './MatchContext';
-import { useAnimations } from './AnimationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useAnimations } from '../../contexts/AnimationContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const ScoreButtons = ({ team, currentScore }) => {
   const { updateScore } = useMatch();
   const { triggerGoalCelebration } = useAnimations();
+  const { currentTheme, themes } = useTheme();
 
   const handleIncrement = () => {
     updateScore(team, 1);
@@ -20,6 +22,9 @@ const ScoreButtons = ({ team, currentScore }) => {
   const shortcutInc = team === 'teamA' ? 'W' : 'P';
   const shortcutDec = team === 'teamA' ? 'Q' : 'O';
 
+  // Get theme colors
+  const themeColors = themes[currentTheme].colors;
+
   return (
     <div className="flex items-center gap-4 my-4">
       <button
@@ -33,13 +38,22 @@ const ScoreButtons = ({ team, currentScore }) => {
         </span>
       </button>
 
-      <div className="flex-1 text-center font-display text-5xl font-bold text-electricMint">
+      <div
+        className="flex-1 text-center font-display text-5xl font-bold"
+        style={{ color: themeColors.primary }}
+      >
         {currentScore}
       </div>
 
       <button
         onClick={handleIncrement}
-        className="relative w-14 h-14 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy rounded-xl flex items-center justify-center font-bold text-3xl button-press transition-all shadow-lg button-glow"
+        className="relative w-14 h-14 text-broadcastNavy rounded-xl flex items-center justify-center font-bold text-3xl button-press transition-all shadow-lg"
+        style={{
+          backgroundColor: themeColors.primary,
+          transition: 'background-color 0.2s ease'
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = themeColors.primaryHover}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = themeColors.primary}
         title={`Increase score (${shortcutInc})`}
       >
         <span>+</span>

@@ -1,7 +1,7 @@
-import { useMatch } from './MatchContext';
-import { useAnimations } from './AnimationContext';
-import { useTranslation } from './TranslationContext';
-import NameEditor from './NameEditor';
+import { useMatch } from '../../contexts/MatchContext';
+import { useAnimations } from '../../contexts/AnimationContext';
+import { useTranslation } from '../../contexts/TranslationContext';
+import NameEditor from '../selectors/NameEditor';
 import ScoreButtons from './ScoreButtons';
 import StatControl from './StatControl';
 import { SquareX } from 'lucide-react';

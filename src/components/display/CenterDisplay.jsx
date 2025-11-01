@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useMatch } from './MatchContext';
-import { useTranslation } from './TranslationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 import { Play, Pause, ChevronDown, RotateCcw } from 'lucide-react';
 
 const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal }) => {

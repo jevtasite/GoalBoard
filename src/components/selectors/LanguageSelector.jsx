@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useTranslation } from './TranslationContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 import { ChevronDown } from 'lucide-react';
 
 const LanguageSelector = ({ isMobile = false }) => {

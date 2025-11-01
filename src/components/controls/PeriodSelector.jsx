@@ -1,5 +1,5 @@
-import { useMatch } from './MatchContext';
-import { useTranslation } from './TranslationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const PeriodSelector = () => {
   const { matchState, updatePeriod } = useMatch();

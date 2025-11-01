@@ -1,5 +1,5 @@
 import { SquareX } from 'lucide-react';
-import { useTranslation } from './TranslationContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const CardIndicators = ({ yellowCards, redCards, fouls }) => {
   const { t } = useTranslation();

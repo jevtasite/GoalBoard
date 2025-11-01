@@ -1,8 +1,8 @@
-import { useMatch } from './MatchContext';
-import { useTranslation } from './TranslationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 import PeriodSelector from './PeriodSelector';
-import LanguageSelector from './LanguageSelector';
-import ThemeSelector from './ThemeSelector';
+import LanguageSelector from '../selectors/LanguageSelector';
+import ThemeSelector from '../selectors/ThemeSelector';
 import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw } from 'lucide-react';
 
 const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal }) => {

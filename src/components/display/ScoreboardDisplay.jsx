@@ -1,5 +1,5 @@
-import { useMatch } from './MatchContext';
-import { useAnimations } from './AnimationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useAnimations } from '../../contexts/AnimationContext';
 import TeamSection from './TeamSection';
 import CenterDisplay from './CenterDisplay';
 import ScanLineOverlay from './ScanLineOverlay';
@@ -12,15 +12,13 @@ const ScoreboardDisplay = ({ presentationMode = false, isMobileDevice = false, i
   // Use column layout if: mobile device AND portrait orientation
   const useColumnLayout = isMobileDevice && isPortrait;
 
-  // Mobile devices get full screen, desktops get split view
-  const heightClass = presentationMode || isMobileDevice
-    ? 'h-screen'
-    : 'h-[60vh] xl:h-[65vh]';
+  // All devices get full screen height (control panel overlays on desktop)
+  const heightClass = 'h-screen';
 
   return (
     <div className={`${heightClass} gradient-background relative flex items-center justify-center ${isPhoneLandscape ? 'px-3' : 'px-6 md:px-8 lg:px-10 xl:px-12'} transition-all duration-300 overflow-hidden`}>
       <ScanLineOverlay />
-      <ScoreboardBars active={animations.goalCelebration.active} team={animations.goalCelebration.team} />
+      <ScoreboardBars active={false} team={null} />
 
       <div
         className={`flex ${useColumnLayout ? 'flex-col' : 'flex-col md:flex-row'} items-center justify-center ${isPhoneLandscape ? 'gap-3' : 'gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16'} z-30 w-full max-h-full ${isPhoneLandscape ? 'py-2' : 'py-4'}`}

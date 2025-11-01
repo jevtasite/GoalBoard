@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useMatch } from './MatchContext';
-import { useAnimations } from './AnimationContext';
+import { useMatch } from '../contexts/MatchContext';
+import { useAnimations } from '../contexts/AnimationContext';
 
 export const useKeyboardShortcuts = (setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal) => {
   const {

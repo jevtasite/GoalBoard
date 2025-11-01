@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAnimations } from './AnimationContext';
-import { useMatch } from './MatchContext';
-import { useTheme } from './ThemeContext';
+import { useAnimations } from '../../contexts/AnimationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import CardIndicators from './CardIndicators';
 import { Pencil, Check, X } from 'lucide-react';
 
@@ -15,29 +15,10 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
 
   const isScoreAnimating = animations.scoreChange.active && animations.scoreChange.team === team;
   const isRedCardEffect = animations.redCardEffect.active && animations.redCardEffect.team === team;
-  const isPulseActive = animations.goalCelebration.active && animations.goalCelebration.team === team;
 
   // Team-specific colors from theme
   const themeColors = themes[currentTheme].colors;
   const teamColor = themeColors.teamNameColor || themeColors.primary; // Both teams use teamNameColor for name
-  const scoreGlowColor = team === 'teamA' ? themeColors.teamA : themeColors.teamB; // Score glow uses team colors
-
-  // Convert hex to RGB for glow effect
-  const hexToRgb = (hex) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '0, 0, 0';
-  };
-  const glowColorRgba = hexToRgb(scoreGlowColor);
-
-  const scoreStyle = {
-    textShadow: isPulseActive ? `
-      0 0 20px rgba(${glowColorRgba}, 0.8),
-      0 0 40px rgba(${glowColorRgba}, 0.6),
-      0 0 60px rgba(${glowColorRgba}, 0.4),
-      0 0 80px rgba(${glowColorRgba}, 0.2)
-    ` : 'none',
-    transition: 'text-shadow 0.8s ease-out'
-  };
 
   const handleScoreIncrease = () => {
     updateScore(team, 1);
@@ -101,8 +82,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
             -
           </button>
           <div
-            className={`font-display ${isPhoneLandscape ? 'text-6xl' : isPhone ? 'text-7xl' : 'text-5xl md:text-9xl'} font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
-            style={scoreStyle}
+            className={`font-display ${isPhoneLandscape ? 'text-6xl' : isPhone ? 'text-7xl' : 'text-5xl md:text-9xl'} font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''}`}
           >
             {teamData.score}
           </div>
@@ -116,8 +96,7 @@ const TeamSection = ({ team, side, teamData, isMobileDevice = false, isPhone = f
       ) : (
         /* Desktop view - score only, no touch controls */
         <div
-          className={`font-display text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''} ${isPulseActive ? 'score-pulse-minimal' : ''}`}
-          style={scoreStyle}
+          className={`font-display text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-score font-bold text-white leading-none ${isScoreAnimating ? 'score-animate' : ''}`}
         >
           {teamData.score}
         </div>

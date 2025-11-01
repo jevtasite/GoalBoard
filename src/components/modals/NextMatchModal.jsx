@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useMatch } from './MatchContext';
-import { useTranslation } from './TranslationContext';
+import { useMatch } from '../../contexts/MatchContext';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const NextMatchModal = ({ isOpen, onClose }) => {
   const [keepNames, setKeepNames] = useState(true);
