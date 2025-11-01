@@ -5,7 +5,7 @@ import CenterDisplay from './CenterDisplay';
 import ScanLineOverlay from './ScanLineOverlay';
 import ScoreboardBars from './ScoreboardBars';
 
-const ScoreboardDisplay = ({ presentationMode = false, isMobileDevice = false, isPortrait = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal, shouldApplyPadding = false }) => {
+const ScoreboardDisplay = ({ presentationMode = false, isMobileDevice = false, isPortrait = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal, setShowSetTimeModal, shouldApplyPadding = false }) => {
   const { matchState, zoomLevel } = useMatch();
   const { animations } = useAnimations();
 
@@ -56,7 +56,7 @@ const ScoreboardDisplay = ({ presentationMode = false, isMobileDevice = false, i
         </div>
 
         <div className={`${useColumnLayout ? 'w-full' : 'w-full md:w-auto md:min-w-[16rem] lg:min-w-[20rem] xl:min-w-[24rem]'} flex-shrink-0`}>
-          <CenterDisplay isMobileDevice={isMobileDevice} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
+          <CenterDisplay isMobileDevice={isMobileDevice} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} setShowSetTimeModal={setShowSetTimeModal} />
         </div>
 
         <div className={`${useColumnLayout ? 'w-full' : 'w-full md:w-72 lg:w-80 xl:w-96 2xl:w-[28rem]'} flex-shrink-0`}>

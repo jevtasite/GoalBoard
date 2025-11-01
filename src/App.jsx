@@ -84,6 +84,7 @@ function AppContent() {
           isPhone={isPhone}
           isPhoneLandscape={isPhoneLandscape}
           setShowResetConfirmModal={setShowResetConfirmModal}
+          setShowSetTimeModal={setShowSetTimeModal}
           shouldApplyPadding={shouldApplyPadding}
         />
 

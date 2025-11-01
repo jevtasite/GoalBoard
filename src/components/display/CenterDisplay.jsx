@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useMatch } from '../../contexts/MatchContext';
 import { useTranslation } from '../../contexts/TranslationContext';
-import { Play, Pause, ChevronDown, RotateCcw } from 'lucide-react';
+import { Play, Pause, ChevronDown, RotateCcw, Clock } from 'lucide-react';
 
-const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal }) => {
+const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandscape = false, setShowResetConfirmModal, setShowSetTimeModal }) => {
   const { matchState, toggleTimer, updatePeriod } = useMatch();
   const { t } = useTranslation();
   const { timer, period } = matchState;
@@ -73,6 +73,13 @@ const CenterDisplay = ({ isMobileDevice = false, isPhone = false, isPhoneLandsca
                 {t('start')}
               </>
             )}
+          </button>
+          <button
+            onClick={() => setShowSetTimeModal && setShowSetTimeModal(true)}
+            className={`${isPhoneLandscape ? 'px-3 py-2 text-sm' : isPhone ? 'px-5 py-3 text-lg' : 'px-4 md:px-6 py-2 md:py-4 text-sm md:text-xl'} bg-steelBlue hover:bg-steelBlue/80 active:bg-steelBlue/60 text-white font-body font-semibold rounded-lg transition-all shadow-lg flex items-center gap-1`}
+            title={t('setTimer')}
+          >
+            <Clock className={`${isPhoneLandscape ? 'w-4 h-4' : isPhone ? 'w-5 h-5' : 'w-4 h-4 md:w-6 md:h-6'}`} />
           </button>
           <button
             onClick={() => setShowResetConfirmModal && setShowResetConfirmModal(true)}
