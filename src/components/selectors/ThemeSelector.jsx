@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Palette, Check, X } from 'lucide-react';
 
@@ -44,8 +45,8 @@ const ThemeSelector = ({ isMobile = false }) => {
         </button>
       )}
 
-      {/* Modal Overlay */}
-      {isOpen && (
+      {/* Modal Overlay - Rendered via Portal to avoid transform issues */}
+      {isOpen && createPortal(
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
           {/* Modal Content */}
           <div className="bg-steelBlue rounded-xl shadow-2xl border-2 border-electricMint/30 w-full max-w-md animate-in fade-in zoom-in duration-200">
@@ -102,7 +103,8 @@ const ThemeSelector = ({ isMobile = false }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
