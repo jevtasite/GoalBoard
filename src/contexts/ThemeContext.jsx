@@ -14,7 +14,11 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState(() => {
     const saved = localStorage.getItem("goalboard-theme");
-    return saved || "dark";
+    // Validate that the saved theme exists, otherwise default to "dark"
+    if (saved && themes[saved]) {
+      return saved;
+    }
+    return "dark";
   });
 
   useEffect(() => {
@@ -22,6 +26,9 @@ export const ThemeProvider = ({ children }) => {
     if (theme) {
       applyTheme(theme);
       localStorage.setItem("goalboard-theme", currentTheme);
+    } else {
+      // If theme doesn't exist, reset to dark
+      setCurrentTheme("dark");
     }
   }, [currentTheme]);
 

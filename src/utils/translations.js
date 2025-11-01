@@ -36,6 +36,10 @@ export const translations = {
     // Modals
     resetTimerTitle: "Reset Timer?",
     resetTimerMessage: "Are you sure you want to reset the timer to 00:00?",
+    setTimer: "Set Timer",
+    minutes: "Minutes",
+    seconds: "Seconds",
+    setTime: "Set Time",
     startNextMatchTitle: "Start Next Match",
     startNextMatchMessage: "This will reset scores, timer, and all statistics.",
     keepTeamNames: "Keep current team names",
@@ -91,6 +95,10 @@ export const translations = {
     resetTimerTitle: "Resetovati Tajmer?",
     resetTimerMessage:
       "Da li ste sigurni da želite da resetujete tajmer na 00:00?",
+    setTimer: "Podesi Tajmer",
+    minutes: "Minuti",
+    seconds: "Sekunde",
+    setTime: "Podesi Vreme",
     startNextMatchTitle: "Započni Novu Utakmicu",
     startNextMatchMessage:
       "Ovo će resetovati rezultate, tajmer i sve statistike.",
@@ -146,6 +154,10 @@ export const translations = {
     // Modals
     resetTimerTitle: "¿Reiniciar Cronómetro?",
     resetTimerMessage: "¿Estás seguro de que quieres reiniciar el cronómetro a 00:00?",
+    setTimer: "Configurar Cronómetro",
+    minutes: "Minutos",
+    seconds: "Segundos",
+    setTime: "Configurar Tiempo",
     startNextMatchTitle: "Iniciar Próximo Partido",
     startNextMatchMessage: "Esto reiniciará los puntajes, el cronómetro y todas las estadísticas.",
     keepTeamNames: "Mantener los nombres actuales de los equipos",

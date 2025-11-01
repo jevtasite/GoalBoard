@@ -140,6 +140,21 @@ export const MatchProvider = ({ children }) => {
     }));
   };
 
+  const setTimerTime = (minutes, seconds) => {
+    const totalMilliseconds = (minutes * 60 + seconds) * 1000;
+    setMatchState((prev) => ({
+      ...prev,
+      timer: {
+        minutes,
+        seconds,
+        milliseconds: 0,
+        isRunning: false,
+        startTime: null,
+        elapsedTime: totalMilliseconds,
+      },
+    }));
+  };
+
   const updatePeriod = (newPeriod) => {
     setMatchState((prev) => ({
       ...prev,
@@ -196,6 +211,7 @@ export const MatchProvider = ({ children }) => {
     updateStats,
     toggleTimer,
     resetTimer,
+    setTimerTime,
     updatePeriod,
     updateTeamName,
     resetMatch,

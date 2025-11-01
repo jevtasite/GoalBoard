@@ -17,10 +17,13 @@ function AppContent() {
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
+  const [showSetTimeModal, setShowSetTimeModal] = useState(false);
+  const [customMinutes, setCustomMinutes] = useState('');
+  const [customSeconds, setCustomSeconds] = useState('');
   const [isControlPanelVisible, setIsControlPanelVisible] = useState(true);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const [shouldApplyPadding, setShouldApplyPadding] = useState(true);
-  const { resetTimer, matchState } = useMatch();
+  const { resetTimer, setTimerTime, matchState } = useMatch();
   const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
   const { t } = useTranslation();
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
@@ -30,6 +33,15 @@ function AppContent() {
   const confirmResetTimer = () => {
     resetTimer();
     setShowResetConfirmModal(false);
+  };
+
+  const handleSetTime = () => {
+    const mins = parseInt(customMinutes) || 0;
+    const secs = parseInt(customSeconds) || 0;
+    setTimerTime(mins, secs);
+    setShowSetTimeModal(false);
+    setCustomMinutes('');
+    setCustomSeconds('');
   };
 
   // Initialize states based on device type on mount
@@ -100,7 +112,14 @@ function AppContent() {
       {/* Control panel slides up from bottom on desktop - absolutely positioned */}
       {!isMobileDevice && isControlPanelVisible && (
         <div className={`fixed bottom-0 left-0 right-0 z-40 ${isAnimatingOut ? 'slide-down' : 'slide-up'}`}>
-          <ControlPanel setPresentationMode={setPresentationMode} showResetConfirmModal={showResetConfirmModal} setShowResetConfirmModal={setShowResetConfirmModal} showNextMatchModal={showNextMatchModal} setShowNextMatchModal={setShowNextMatchModal} />
+          <ControlPanel
+            setPresentationMode={setPresentationMode}
+            showResetConfirmModal={showResetConfirmModal}
+            setShowResetConfirmModal={setShowResetConfirmModal}
+            showNextMatchModal={showNextMatchModal}
+            setShowNextMatchModal={setShowNextMatchModal}
+            setShowSetTimeModal={setShowSetTimeModal}
+          />
         </div>
       )}
 
@@ -159,6 +178,79 @@ function AppContent() {
         isOpen={showNextMatchModal}
         onClose={() => setShowNextMatchModal(false)}
       />
+
+      {/* Set Time Modal - always accessible even in Projector Mode */}
+      {showSetTimeModal && (
+        <div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => {
+            setShowSetTimeModal(false);
+            setCustomMinutes('');
+            setCustomSeconds('');
+          }}
+        >
+          <div
+            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
+              {t('setTimer')}
+            </h2>
+            <div className="flex gap-4 mb-6">
+              <div className="flex-1">
+                <label className="block text-sm font-body text-white mb-2">
+                  {t('minutes')}
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  max="99"
+                  value={customMinutes}
+                  onChange={(e) => setCustomMinutes(e.target.value)}
+                  className="w-full px-4 py-3 bg-steelBlue text-electricMint font-mono text-2xl rounded-lg border-2 border-steelBlue focus:border-electricMint focus:outline-none text-center"
+                  placeholder="00"
+                  autoFocus
+                />
+              </div>
+              <div className="flex items-end pb-3">
+                <span className="text-electricMint font-mono text-3xl">:</span>
+              </div>
+              <div className="flex-1">
+                <label className="block text-sm font-body text-white mb-2">
+                  {t('seconds')}
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  max="59"
+                  value={customSeconds}
+                  onChange={(e) => setCustomSeconds(e.target.value)}
+                  className="w-full px-4 py-3 bg-steelBlue text-electricMint font-mono text-2xl rounded-lg border-2 border-steelBlue focus:border-electricMint focus:outline-none text-center"
+                  placeholder="00"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowSetTimeModal(false);
+                  setCustomMinutes('');
+                  setCustomSeconds('');
+                }}
+                className="flex-1 px-6 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+              >
+                {t('cancel')}
+              </button>
+              <button
+                onClick={handleSetTime}
+                className="flex-1 px-6 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+              >
+                {t('setTime')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

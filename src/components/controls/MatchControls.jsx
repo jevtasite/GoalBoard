@@ -3,9 +3,9 @@ import { useTranslation } from '../../contexts/TranslationContext';
 import PeriodSelector from './PeriodSelector';
 import LanguageSelector from '../selectors/LanguageSelector';
 import ThemeSelector from '../selectors/ThemeSelector';
-import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw } from 'lucide-react';
+import { Play, Pause, RotateCcw, Maximize, Monitor, RefreshCw, Clock } from 'lucide-react';
 
-const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal }) => {
+const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowResetConfirmModal, showNextMatchModal, setShowNextMatchModal, setShowSetTimeModal }) => {
   const { matchState, toggleTimer, zoomLevel, setZoomLevel } = useMatch();
   const { t } = useTranslation();
   const { timer } = matchState;
@@ -62,6 +62,14 @@ const MatchControls = ({ setPresentationMode, showResetConfirmModal, setShowRese
           <span className="absolute top-1 right-1 text-[10px] bg-black/30 px-1 rounded text-white">
             Space
           </span>
+        </button>
+
+        <button
+          onClick={() => setShowSetTimeModal(true)}
+          className="px-4 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press flex items-center justify-center gap-2"
+          title="Set timer start time"
+        >
+          <Clock className="w-4 h-4" />
         </button>
 
         <button

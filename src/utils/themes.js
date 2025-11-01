@@ -35,19 +35,19 @@ export const themes = {
       teamNameColor: '#00D9FF',
     }
   },
-  sunset: {
-    name: 'Sunset',
+  retro: {
+    name: 'Retro',
     colors: {
-      background: '#1A0F2E',
-      primary: '#FF6B35',
-      primaryHover: '#FF5722',
-      primaryActive: '#E64A19',
-      secondary: '#FFD23F',
-      steel: '#3D2C5F',
-      slate: '#B8A3D6',
-      teamA: '#FF6B35',
-      teamB: '#FFD23F',
-      teamNameColor: '#FF6B35',
+      background: '#2B1B17',
+      primary: '#FFA500',
+      primaryHover: '#FF8C00',
+      primaryActive: '#FF7300',
+      secondary: '#00CED1',
+      steel: '#3E2723',
+      slate: '#FFCC80',
+      teamA: '#FFA500',
+      teamB: '#00CED1',
+      teamNameColor: '#FFE4B5',
     }
   },
   forest: {
