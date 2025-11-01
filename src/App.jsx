@@ -19,6 +19,7 @@ function AppContent() {
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
   const [isControlPanelVisible, setIsControlPanelVisible] = useState(true);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const [shouldApplyPadding, setShouldApplyPadding] = useState(true);
   const { resetTimer, matchState } = useMatch();
   const { isMobileDevice, isPortrait, isPhone, isPhoneLandscape } = useDeviceDetection();
   const { t } = useTranslation();
@@ -31,6 +32,14 @@ function AppContent() {
     setShowResetConfirmModal(false);
   };
 
+  // Initialize states based on device type on mount
+  useEffect(() => {
+    if (isMobileDevice) {
+      setIsControlPanelVisible(false);
+      setShouldApplyPadding(false);
+    }
+  }, [isMobileDevice]);
+
   // Handle control panel animation when presentation mode changes
   useEffect(() => {
     if (!isMobileDevice) {
@@ -40,10 +49,12 @@ function AppContent() {
         const timer = setTimeout(() => {
           setIsControlPanelVisible(false);
           setIsAnimatingOut(false);
+          setShouldApplyPadding(false); // Remove padding after animation
         }, 300); // Match animation duration
         return () => clearTimeout(timer);
       } else {
         // Exiting presentation mode - show and slide up
+        setShouldApplyPadding(true); // Apply padding immediately
         setIsControlPanelVisible(true);
       }
     }
@@ -53,7 +64,15 @@ function AppContent() {
     <div className="min-h-screen bg-broadcastNavy overflow-hidden relative">
       {/* Scoreboard - full screen on desktop, adjusts on mobile */}
       <div className={isMobileDevice ? 'flex flex-col' : 'h-screen'}>
-        <ScoreboardDisplay presentationMode={presentationMode} isMobileDevice={isMobileDevice} isPortrait={isPortrait} isPhone={isPhone} isPhoneLandscape={isPhoneLandscape} setShowResetConfirmModal={setShowResetConfirmModal} />
+        <ScoreboardDisplay
+          presentationMode={presentationMode}
+          isMobileDevice={isMobileDevice}
+          isPortrait={isPortrait}
+          isPhone={isPhone}
+          isPhoneLandscape={isPhoneLandscape}
+          setShowResetConfirmModal={setShowResetConfirmModal}
+          shouldApplyPadding={shouldApplyPadding}
+        />
 
         {/* Language Selector for mobile devices - hide when timer is running */}
         <div className={`transition-opacity duration-300 ${isMobileDevice && !presentationMode && !isTimerRunning ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
