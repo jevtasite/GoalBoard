@@ -174,4 +174,62 @@ export const translations = {
     toToggleControls: "para alternar controles)",
     controls: "Controles",
   },
+
+  pt: {
+    // Team names
+    teamA: "Equipe A",
+    teamB: "Equipe B",
+
+    // Match controls
+    matchControls: "Controles da Partida",
+    start: "Iniciar",
+    pause: "Pausar",
+    reset: "Reiniciar",
+    nextMatch: "Próxima Partida",
+    fullscreen: "Tela Cheia",
+    projector: "Projetor",
+
+    // Period names
+    preMatch: "Pré-Partida",
+    firstHalf: "Primeiro Tempo",
+    halfTime: "Intervalo",
+    secondHalf: "Segundo Tempo",
+    fullTime: "Tempo Final",
+    extraTime: "Tempo Extra",
+    penalties: "Pênaltis",
+
+    // Stats
+    yellowCards: "Cartões Amarelos",
+    redCards: "Cartões Vermelhos",
+    fouls: "Faltas",
+    corners: "Escanteios",
+
+    // Actions
+    editName: "Editar Nome",
+    cancel: "Cancelar",
+    save: "Salvar",
+
+    // Modals
+    resetTimerTitle: "Reiniciar Cronômetro?",
+    resetTimerMessage: "Tem certeza que deseja reiniciar o cronômetro para 00:00?",
+    setTimer: "Configurar Cronômetro",
+    minutes: "Minutos",
+    seconds: "Segundos",
+    setTime: "Configurar Tempo",
+    startNextMatchTitle: "Iniciar Próxima Partida",
+    startNextMatchMessage: "Isso reiniciará os placares, cronômetro e todas as estatísticas.",
+    keepTeamNames: "Manter nomes atuais das equipes",
+    startNewMatch: "Iniciar Nova Partida",
+
+    // Placeholders
+    teamANamePlaceholder: "Nome da Equipe A",
+    teamBNamePlaceholder: "Nome da Equipe B",
+
+    // Other
+    vs: "VS",
+    scoreboardSize: "Tamanho do Placar",
+    projectorMode: "Modo Projetor (Pressione",
+    toToggleControls: "para alternar controles)",
+    controls: "Controles",
+  },
 };
