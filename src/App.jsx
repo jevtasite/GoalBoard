@@ -151,6 +151,20 @@ function AppContent() {
       {/* Control panel slides up from bottom on desktop - absolutely positioned */}
       {!isMobileDevice && isControlPanelVisible && (
         <div className={`fixed bottom-0 left-0 right-0 z-40 ${isAnimatingOut ? 'slide-down' : 'slide-up'}`}>
+          {/* Developer Credit - Above control panel */}
+          <div className="flex justify-center pb-3">
+            <a
+              href="https://jevta.site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-steelBlue/60 hover:bg-steelBlue/80 backdrop-blur-sm border border-electricMint/30 rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              <span className="font-body text-xs md:text-sm text-white/80">
+                <span className="text-electricMint font-semibold">&lt;/&gt;</span> Jevta
+              </span>
+            </a>
+          </div>
+
           <ControlPanel
             setPresentationMode={setPresentationMode}
             showResetConfirmModal={showResetConfirmModal}
