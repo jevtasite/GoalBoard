@@ -157,6 +157,14 @@ export const themes = {
   },
 };
 
+// Helper function to convert hex to RGB
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+    : '0, 255, 135';
+};
+
 export const applyTheme = (theme) => {
   const root = document.documentElement;
   const colors = theme.colors;
@@ -171,4 +179,7 @@ export const applyTheme = (theme) => {
   root.style.setProperty('--color-slate', colors.slate);
   root.style.setProperty('--color-team-a', colors.teamA);
   root.style.setProperty('--color-team-b', colors.teamB);
+
+  // Apply RGB versions for rgba() usage
+  root.style.setProperty('--color-primary-rgb', hexToRgb(colors.primary));
 };

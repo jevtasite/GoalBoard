@@ -72,8 +72,8 @@ function AppContent() {
   const languages = [
     { code: 'en', name: 'English', flagCode: 'gb' },
     { code: 'sr', name: 'Srpski', flagCode: 'rs' },
-    { code: 'es', name: 'EspaÃ±ol', flagCode: 'es' },
-    { code: 'pt', name: 'PortuguÃªs', flagCode: 'pt' }
+    { code: 'es', name: 'Español', flagCode: 'es' },
+    { code: 'pt', name: 'Português', flagCode: 'pt' }
   ];
 
   // Initialize states based on device type on mount

@@ -95,6 +95,17 @@ body {
   to { opacity: 0; }
 }
 
+@keyframes landingCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -195,6 +206,96 @@ body {
 .page-fade-out {
   animation: pageFadeOut 300ms ease-in forwards;
 }
+
+.landing-card-entrance {
+  animation: landingCardEntrance 600ms ease-out;
+}
+
+/* Landing Page Theme-Adaptive Styles */
+.landing-card {
+  background-color: var(--color-steel);
+  border: 2px solid rgba(var(--color-primary-rgb, 0, 255, 135), 0.3);
+  box-shadow: 0 0 40px rgba(var(--color-primary-rgb, 0, 255, 135), 0.15);
+  transition: all 0.3s ease;
+}
+
+.landing-logo {
+  filter: drop-shadow(0 0 10px rgba(var(--color-primary-rgb, 0, 255, 135), 0.3));
+  transition: all 0.3s ease;
+}
+
+.landing-icon {
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+.landing-title {
+  color: var(--color-primary);
+  text-shadow: 0 0 20px rgba(var(--color-primary-rgb, 0, 255, 135), 0.4);
+  transition: all 0.3s ease;
+}
+
+.landing-description {
+  color: var(--color-slate);
+  transition: color 0.3s ease;
+}
+
+.landing-button {
+  background: var(--color-primary);
+  color: var(--color-background);
+  box-shadow: 0 0 20px rgba(var(--color-primary-rgb, 0, 255, 135), 0.3);
+  transition: all 0.3s ease;
+}
+
+.landing-button:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 30px rgba(var(--color-primary-rgb, 0, 255, 135), 0.5);
+}
+
+.landing-checkbox-label {
+  color: var(--color-slate);
+  transition: color 0.3s ease;
+}
+
+.landing-checkbox-label:hover {
+  color: var(--color-primary);
+}
+
+.landing-features-border {
+  border-top: 1px solid rgba(var(--color-primary-rgb, 0, 255, 135), 0.3);
+}
+
+.landing-feature-card {
+  background: var(--color-background);
+  border: 1px solid rgba(var(--color-primary-rgb, 0, 255, 135), 0.3);
+  transition: all 0.3s ease;
+}
+
+.landing-feature-card:hover {
+  background: var(--color-steel);
+  border-color: rgba(var(--color-primary-rgb, 0, 255, 135), 0.6);
+  box-shadow: 0 0 15px rgba(var(--color-primary-rgb, 0, 255, 135), 0.3);
+  transform: translateY(-2px);
+}
+
+.landing-feature-icon {
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.landing-feature-card:hover .landing-feature-icon {
+  transform: scale(1.1);
+}
+
+.landing-feature-label {
+  color: var(--color-slate);
+  transition: color 0.3s ease;
+}
+
+.landing-feature-card:hover .landing-feature-label {
+  color: var(--color-primary);
+}
+
 .gradient-background {
   background: linear-gradient(135deg, var(--color-background) 0%, var(--color-steel) 100%);
   transition: background 0.3s ease;

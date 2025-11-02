@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Monitor, Play, Timer, Maximize, RectangleVertical } from 'lucide-react';
+import { Play, Timer, Maximize, RectangleVertical, Palette, Monitor } from 'lucide-react';
 import ScanLineOverlay from '../display/ScanLineOverlay';
-import ThemeSelector from '../selectors/ThemeSelector';
 import DeveloperCredit from '../misc/DeveloperCredit';
 import { setSEO } from '../../utils/seo';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const LandingScreen = ({ onStart }) => {
   const [isExiting, setIsExiting] = useState(false);
   const [skipNext, setSkipNext] = useState(() => {
     try { return localStorage.getItem('skipLanding') === '1'; } catch { return false; }
   });
+  const { changeTheme } = useTheme();
 
   const startWithTransition = () => {
     setIsExiting(true);
@@ -31,35 +32,45 @@ const LandingScreen = ({ onStart }) => {
     });
   }, []);
 
+  // Set theme to dark on mount for landing page
+  useEffect(() => {
+    changeTheme('dark');
+  }, [changeTheme]);
+
   return (
-    <div className={`min-h-screen gradient-background relative flex items-center justify-center overflow-hidden ${isExiting ? 'page-fade-out' : 'page-fade-in'}`}>
+    <div className={`min-h-screen gradient-background relative flex items-center justify-center p-4 ${isExiting ? 'page-fade-out' : 'page-fade-in'}`}>
       <ScanLineOverlay />
 
-      {/* Top controls: theme only (landing is English-only) */}
-      <div className="absolute top-4 left-4 z-40">
-        <ThemeSelector />
-      </div>
-
       {/* Center card */}
-      <div className="relative z-30 w-full max-w-4xl px-6">
-        <div className="bg-broadcastNavy/70 backdrop-blur-md border-2 border-electricMint/30 rounded-2xl shadow-2xl p-8 md:p-12 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Monitor className="w-8 h-8 text-electricMint" />
-            <h1 className="font-heading text-4xl md:text-5xl text-electricMint uppercase tracking-widest">GoalBoard</h1>
+      <div className="relative z-30 w-full max-w-3xl">
+        <div className="landing-card backdrop-blur-xl rounded-2xl shadow-xl p-6 md:p-10 text-center landing-card-entrance">
+          {/* Hero Section */}
+          <div className="mb-6">
+            <div className="flex items-center justify-center mb-4">
+              <img
+                src="/logo/gb-logo-white.png"
+                alt="GoalBoard Logo"
+                className="w-16 h-16 md:w-20 md:h-20 object-contain landing-logo"
+              />
+            </div>
+            <h1 className="font-heading text-4xl md:text-6xl landing-title uppercase tracking-widest mb-3">
+              GoalBoard
+            </h1>
+            <p className="font-body text-base md:text-lg max-w-xl mx-auto landing-description">
+              Professional football scoreboard with live scores, precision timer, cards, and projector mode.
+            </p>
           </div>
-          <p className="font-body text-white/90 text-base md:text-lg max-w-3xl mx-auto">
-            Professional digital scoreboard for football. Live score tracking, precision timer, cards, fouls, corners, projector mode, and themes.
-          </p>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3">
+          {/* CTA Section */}
+          <div className="mt-6 mb-6 flex flex-col items-center justify-center gap-3">
             <button
               onClick={startWithTransition}
-              className="px-6 md:px-8 py-3 md:py-4 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg flex items-center gap-2"
+              className="landing-button px-8 md:px-10 py-3 md:py-4 font-body font-bold text-base md:text-lg rounded-lg transition-all duration-300 button-press flex items-center gap-2"
             >
               <Play className="w-5 h-5" />
-              Start
+              Launch Scoreboard
             </button>
-            <label className="flex items-center gap-2 text-white/80 font-body cursor-pointer select-none text-sm md:text-base text-center break-words max-w-full">
+            <label className="flex items-center gap-2 landing-checkbox-label font-body cursor-pointer select-none text-sm md:text-base transition-colors">
               <input
                 type="checkbox"
                 checked={skipNext}
@@ -69,15 +80,20 @@ const LandingScreen = ({ onStart }) => {
                 }}
                 className="checkbox-mint"
               />
-              <span className="max-w-[32ch] sm:max-w-none leading-snug">Skip landing next time</span>
+              <span>Skip this screen next time</span>
             </label>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
-            <Feature icon={<Monitor className="w-4 h-4" />} label="Live Scores" />
-            <Feature icon={<Timer className="w-4 h-4" />} label="Millisecond Timer" />
-            <Feature icon={<RectangleVertical className="w-4 h-4" />} label="Cards & Fouls" />
-            <Feature icon={<Maximize className="w-4 h-4" />} label="Projector Mode" />
+          {/* Features Grid */}
+          <div className="mt-8 pt-6 landing-features-border">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <Feature icon={<Timer className="w-4 h-4" />} label="Precision Timer" />
+              <Feature icon={<RectangleVertical className="w-4 h-4" />} label="Cards & Fouls" />
+              <Feature icon={<Maximize className="w-4 h-4" />} label="Projector Mode" />
+              <Feature icon={<Palette className="w-4 h-4" />} label="Custom Themes" />
+              <Feature icon={<Monitor className="w-4 h-4" />} label="Responsive" />
+              <Feature icon={<Monitor className="w-4 h-4" />} label="Multi-Language" />
+            </div>
           </div>
         </div>
       </div>
@@ -89,9 +105,13 @@ const LandingScreen = ({ onStart }) => {
 };
 
 const Feature = ({ label, icon }) => (
-  <div className="bg-steelBlue/40 border border-electricMint/20 rounded-lg px-3 py-2 text-white/90 font-body text-sm flex items-center gap-2">
-    {icon}
-    <span>{label}</span>
+  <div className="landing-feature-card rounded-lg px-3 py-3 font-body text-sm transition-all duration-300">
+    <div className="flex flex-col items-center justify-center gap-2 text-center">
+      <div className="landing-feature-icon">
+        {icon}
+      </div>
+      <span className="landing-feature-label font-semibold leading-tight">{label}</span>
+    </div>
   </div>
 );
 

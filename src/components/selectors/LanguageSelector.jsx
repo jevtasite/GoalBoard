@@ -5,11 +5,11 @@ const LanguageSelector = ({ isMobile = false, setShowLanguageModal }) => {
   const { language } = useTranslation();
 
   const languages = [
-    { code: 'en', name: 'English', flagCode: 'gb' },
-    { code: 'sr', name: 'Srpski', flagCode: 'rs' },
-    { code: 'es', name: 'Español', flagCode: 'es' },
-    { code: 'pt', name: 'Português', flagCode: 'pt' }
-  ];
+  { code: 'en', name: 'English', flagCode: 'gb' },
+  { code: 'sr', name: 'Srpski', flagCode: 'rs' },
+  { code: 'es', name: 'Español', flagCode: 'es' },
+  { code: 'pt', name: 'Português', flagCode: 'pt' }
+];
 
   const currentLanguage = languages.find(lang => lang.code === language);
 
