@@ -1,5 +1,7 @@
 export const translations = {
   en: {
+    appTitle: "GoalBoard",
+    tagline: "Professional digital scoreboard for football. Live score tracking, precision timer, cards, fouls, corners, projector mode, and themes.",
     // Team names
     teamA: "Team A",
     teamB: "Team B",
@@ -67,9 +69,16 @@ export const translations = {
     diagonal: "Diagonal",
     circuit: "Circuit",
     none: "None",
+    liveScores: "Live Scores",
+    millisecondTimer: "Millisecond Timer",
+    cardsAndFouls: "Cards & Fouls",
+    projectorModeFeature: "Projector Mode",
+    skipLanding: "Skip landing next time",
   },
 
   sr: {
+    appTitle: "GoalBoard",
+    tagline: "Profesionalni digitalni semafor za fudbal. Rezultat uživo, precizan tajmer, kartoni, faulovi, korneri, režim projektora i teme.",
     // Team names
     teamA: "Tim A",
     teamB: "Tim B",
@@ -139,9 +148,16 @@ export const translations = {
     diagonal: "Dijagonale",
     circuit: "Kolo",
     none: "Bez Pozadine",
+    liveScores: "Rezultat uživo",
+    millisecondTimer: "Tajmer u milisekundama",
+    cardsAndFouls: "Kartoni i faulovi",
+    projectorModeFeature: "Režim projektora",
+    skipLanding: "Preskoči početni ekran sledeći put",
   },
 
   es: {
+    appTitle: "GoalBoard",
+    tagline: "Marcador digital profesional para fútbol. Marcador en vivo, cronómetro preciso, tarjetas, faltas, córners, modo proyector y temas.",
     // Team names
     teamA: "Equipo A",
     teamB: "Equipo B",
@@ -209,9 +225,16 @@ export const translations = {
     diagonal: "Diagonal",
     circuit: "Circuito",
     none: "Ninguno",
+    liveScores: "Marcador en vivo",
+    millisecondTimer: "Cronómetro en milisegundos",
+    cardsAndFouls: "Tarjetas y faltas",
+    projectorModeFeature: "Modo proyector",
+    skipLanding: "Omitir portada la próxima vez",
   },
 
   pt: {
+    appTitle: "GoalBoard",
+    tagline: "Placar digital profissional para futebol. Placar ao vivo, cronômetro preciso, cartões, faltas, escanteios, modo projetor e temas.",
     // Team names
     teamA: "Equipe A",
     teamB: "Equipe B",
@@ -279,5 +302,10 @@ export const translations = {
     diagonal: "Diagonal",
     circuit: "Circuito",
     none: "Nenhum",
+    liveScores: "Placar ao vivo",
+    millisecondTimer: "Cronômetro em milissegundos",
+    cardsAndFouls: "Cartões e faltas",
+    projectorModeFeature: "Modo projetor",
+    skipLanding: "Pular a página inicial da próxima vez",
   },
 };

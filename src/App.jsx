@@ -13,9 +13,16 @@ import ThemeSelector from './components/selectors/ThemeSelector';
 import DeveloperCredit from './components/misc/DeveloperCredit';
 import { Monitor } from 'lucide-react';
 import LandingScreen from './components/landing/LandingScreen';
+import { setSEO } from './utils/seo';
 
 function AppContent() {
-  const [showLanding, setShowLanding] = useState(true);
+  const [showLanding, setShowLanding] = useState(() => {
+    try {
+      return localStorage.getItem('skipLanding') === '1' ? false : true;
+    } catch {
+      return true;
+    }
+  });
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
@@ -32,6 +39,16 @@ function AppContent() {
   useKeyboardShortcuts(setShowNextMatchModal, setPresentationMode, setShowResetConfirmModal);
 
   const isTimerRunning = matchState.timer.isRunning;
+
+  // SEO for scoreboard view
+  useEffect(() => {
+    if (!showLanding) {
+      setSEO({
+        title: 'GoalBoard - Live Scoreboard',
+        description: 'Live football scoreboard with timer, cards, fouls, corners, and projector mode.'
+      });
+    }
+  }, [showLanding]);
 
   const confirmResetTimer = () => {
     resetTimer();
@@ -55,8 +72,8 @@ function AppContent() {
   const languages = [
     { code: 'en', name: 'English', flagCode: 'gb' },
     { code: 'sr', name: 'Srpski', flagCode: 'rs' },
-    { code: 'es', name: 'Español', flagCode: 'es' },
-    { code: 'pt', name: 'Português', flagCode: 'pt' }
+    { code: 'es', name: 'EspaÃ±ol', flagCode: 'es' },
+    { code: 'pt', name: 'PortuguÃªs', flagCode: 'pt' }
   ];
 
   // Initialize states based on device type on mount
