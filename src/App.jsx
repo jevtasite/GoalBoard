@@ -12,8 +12,10 @@ import LanguageSelector from './components/selectors/LanguageSelector';
 import ThemeSelector from './components/selectors/ThemeSelector';
 import DeveloperCredit from './components/misc/DeveloperCredit';
 import { Monitor } from 'lucide-react';
+import LandingScreen from './components/landing/LandingScreen';
 
 function AppContent() {
+  const [showLanding, setShowLanding] = useState(true);
   const [showNextMatchModal, setShowNextMatchModal] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showResetConfirmModal, setShowResetConfirmModal] = useState(false);
@@ -85,6 +87,12 @@ function AppContent() {
       }
     }
   }, [presentationMode, isMobileDevice]);
+
+  if (showLanding) {
+    return (
+      <LandingScreen onStart={() => setShowLanding(false)} />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-broadcastNavy overflow-hidden relative">
