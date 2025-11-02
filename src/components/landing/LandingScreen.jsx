@@ -67,7 +67,7 @@ const LandingScreen = ({ onStart }) => {
                   const v = e.target.checked; setSkipNext(v);
                   try { v ? localStorage.setItem('skipLanding', '1') : localStorage.removeItem('skipLanding'); } catch {}
                 }}
-                className="w-4 h-4 accent-electricMint"
+                className="checkbox-mint"
               />
               <span className="max-w-[32ch] sm:max-w-none leading-snug">Skip landing next time</span>
             </label>

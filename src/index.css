@@ -153,6 +153,41 @@ body {
 }
 
 /* Utility Classes */
+.checkbox-mint {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem; /* 16px */
+  height: 1rem;
+  border-radius: 0.25rem;
+  border: 2px solid var(--color-primary);
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.checkbox-mint:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.35);
+}
+
+.checkbox-mint:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-mint:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 10px;
+  transform: translate(-50%, -60%) rotate(45deg);
+  border-right: 2px solid var(--color-background);
+  border-bottom: 2px solid var(--color-background);
+}
 .page-fade-in {
   animation: pageFadeIn 300ms ease-out;
 }
