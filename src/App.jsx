@@ -95,7 +95,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-broadcastNavy overflow-hidden relative">
+    <div className="min-h-screen bg-broadcastNavy overflow-hidden relative page-fade-in">
       {/* Scoreboard - full screen on desktop, adjusts on mobile */}
       <div className={isMobileDevice ? 'flex flex-col' : 'h-screen'}>
         <ScoreboardDisplay

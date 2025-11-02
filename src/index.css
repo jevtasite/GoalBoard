@@ -84,6 +84,17 @@ body {
   }
 }
 
+/* Page fade transitions */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pageFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -142,6 +153,13 @@ body {
 }
 
 /* Utility Classes */
+.page-fade-in {
+  animation: pageFadeIn 300ms ease-out;
+}
+
+.page-fade-out {
+  animation: pageFadeOut 300ms ease-in forwards;
+}
 .gradient-background {
   background: linear-gradient(135deg, var(--color-background) 0%, var(--color-steel) 100%);
   transition: background 0.3s ease;
