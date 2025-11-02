@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Play, Timer, Maximize, RectangleVertical, Palette, Monitor } from 'lucide-react';
+import { Play, Timer, Maximize, RectangleVertical, Palette, Monitor, Languages } from 'lucide-react';
 import ScanLineOverlay from '../display/ScanLineOverlay';
-import DeveloperCredit from '../misc/DeveloperCredit';
 import { setSEO } from '../../utils/seo';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -38,31 +37,31 @@ const LandingScreen = ({ onStart }) => {
   }, [changeTheme]);
 
   return (
-    <div className={`min-h-screen gradient-background relative flex items-center justify-center p-4 ${isExiting ? 'page-fade-out' : 'page-fade-in'}`}>
+    <div className={`min-h-screen gradient-background relative flex flex-col items-center justify-center p-4 ${isExiting ? 'page-fade-out' : 'page-fade-in'}`}>
       <ScanLineOverlay />
 
       {/* Center card */}
       <div className="relative z-30 w-full max-w-3xl">
-        <div className="landing-card backdrop-blur-xl rounded-2xl shadow-xl p-6 md:p-10 text-center landing-card-entrance">
+        <div className="landing-card backdrop-blur-xl rounded-2xl shadow-xl p-5 md:p-10 text-center landing-card-entrance">
           {/* Hero Section */}
-          <div className="mb-6">
-            <div className="flex items-center justify-center mb-4">
+          <div className="mb-4">
+            <div className="flex items-center justify-center mb-3">
               <img
                 src="/logo/gb-logo-white.png"
                 alt="GoalBoard Logo"
-                className="w-16 h-16 md:w-20 md:h-20 object-contain landing-logo"
+                className="w-14 h-14 md:w-20 md:h-20 object-contain landing-logo"
               />
             </div>
-            <h1 className="font-heading text-4xl md:text-6xl landing-title uppercase tracking-widest mb-3">
+            <h1 className="font-heading text-3xl md:text-6xl landing-title uppercase tracking-widest mb-2">
               GoalBoard
             </h1>
-            <p className="font-body text-base md:text-lg max-w-xl mx-auto landing-description">
+            <p className="font-body text-sm md:text-lg max-w-xl mx-auto landing-description">
               Professional football scoreboard with live scores, precision timer, cards, and projector mode.
             </p>
           </div>
 
           {/* CTA Section */}
-          <div className="mt-6 mb-6 flex flex-col items-center justify-center gap-3">
+          <div className="mt-4 mb-4 flex flex-col items-center justify-center gap-2.5">
             <button
               onClick={startWithTransition}
               className="landing-button px-8 md:px-10 py-3 md:py-4 font-body font-bold text-base md:text-lg rounded-lg transition-all duration-300 button-press flex items-center gap-2"
@@ -85,21 +84,32 @@ const LandingScreen = ({ onStart }) => {
           </div>
 
           {/* Features Grid */}
-          <div className="mt-8 pt-6 landing-features-border">
+          <div className="mt-6 pt-4 landing-features-border">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               <Feature icon={<Timer className="w-4 h-4" />} label="Precision Timer" />
               <Feature icon={<RectangleVertical className="w-4 h-4" />} label="Cards & Fouls" />
               <Feature icon={<Maximize className="w-4 h-4" />} label="Projector Mode" />
               <Feature icon={<Palette className="w-4 h-4" />} label="Custom Themes" />
               <Feature icon={<Monitor className="w-4 h-4" />} label="Responsive" />
-              <Feature icon={<Monitor className="w-4 h-4" />} label="Multi-Language" />
+              <Feature icon={<Languages className="w-4 h-4" />} label="Multi-Language" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer credit */}
-      <DeveloperCredit />
+      {/* Developer Credit - Below card */}
+      <div className="relative z-30 mt-6 flex justify-center">
+        <a
+          href="https://jevta.site"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-steelBlue/60 hover:bg-steelBlue/80 backdrop-blur-sm border border-electricMint/30 rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
+        >
+          <span className="font-body text-xs md:text-sm text-white/80">
+            <span className="text-electricMint font-semibold">&lt;/&gt;</span> Jevta
+          </span>
+        </a>
+      </div>
     </div>
   );
 };
