@@ -43,7 +43,7 @@ const NextMatchModal = ({ isOpen, onClose }) => {
           {t('startNextMatchTitle')}
         </h2>
 
-        <p className="font-body text-white mb-6">
+        <p className="font-body text-slateGray mb-6">
           {t('startNextMatchMessage')}
         </p>
 
@@ -55,7 +55,7 @@ const NextMatchModal = ({ isOpen, onClose }) => {
               onChange={(e) => setKeepNames(e.target.checked)}
               className="w-5 h-5 accent-electricMint cursor-pointer"
             />
-            <span className="font-body text-white group-hover:text-electricMint transition-colors">
+            <span className="font-body text-slateGray group-hover:text-electricMint transition-colors">
               {t('keepTeamNames')}
             </span>
           </label>

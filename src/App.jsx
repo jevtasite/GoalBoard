@@ -359,14 +359,10 @@ function AppContent() {
           onClick={() => setShowLanguageModal(false)}
         >
           <div
-            className="rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl"
-            style={{
-              backgroundColor: 'var(--color-background)',
-              border: '2px solid var(--color-steel)'
-            }}
+            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-heading text-2xl md:text-3xl mb-4 uppercase tracking-wide" style={{ color: 'var(--color-primary)' }}>
+            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
               {t('selectLanguage')}
             </h2>
 
@@ -375,20 +371,11 @@ function AppContent() {
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageSelect(lang.code)}
-                  className="w-full px-6 py-4 font-body transition-colors text-left flex items-center gap-4 rounded-lg"
-                  style={{
-                    backgroundColor: lang.code === language ? 'var(--color-primary)' : 'var(--color-steel)',
-                    color: lang.code === language ? 'var(--color-background)' : 'var(--color-slate)',
-                    fontWeight: lang.code === language ? '600' : '400'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (lang.code !== language) {
-                      e.currentTarget.style.opacity = '0.8';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = '1';
-                  }}
+                  className={`w-full px-6 py-4 font-body text-left flex items-center gap-4 rounded-lg transition-all ${
+                    lang.code === language
+                      ? 'bg-electricMint text-broadcastNavy font-semibold'
+                      : 'bg-steelBlue text-slateGray hover:bg-steelBlue/80'
+                  }`}
                 >
                   <span className={`fi fi-${lang.flagCode} text-2xl`}></span>
                   <span className="text-lg">{lang.name}</span>
