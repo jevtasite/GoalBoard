@@ -198,27 +198,43 @@ function AppContent() {
           onClick={() => setShowResetConfirmModal(false)}
         >
           <div
-            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
+            className="rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl"
+            style={{
+              backgroundColor: 'var(--color-background)',
+              border: '2px solid var(--color-steel)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
+            <h2 className="font-heading text-2xl md:text-3xl mb-4 uppercase tracking-wide" style={{ color: 'var(--color-primary)' }}>
               {t('resetTimerTitle')}
             </h2>
 
-            <p className="font-body text-white mb-6">
+            <p className="font-body mb-6" style={{ color: 'var(--color-slate)' }}>
               {t('resetTimerMessage')}
             </p>
 
             <div className="flex gap-4">
               <button
                 onClick={() => setShowResetConfirmModal(false)}
-                className="flex-1 px-6 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body rounded-lg transition-all button-press"
+                className="flex-1 px-6 py-3 font-body rounded-lg transition-all button-press"
+                style={{
+                  backgroundColor: 'var(--color-steel)',
+                  color: 'var(--color-slate)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 {t('cancel')}
               </button>
               <button
                 onClick={confirmResetTimer}
-                className="flex-1 px-6 py-3 bg-broadcastRed hover:bg-broadcastRed/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+                className="flex-1 px-6 py-3 font-body font-semibold rounded-lg transition-all button-press"
+                style={{
+                  backgroundColor: '#DC2626',
+                  color: 'white'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 {t('reset')}
               </button>
@@ -244,15 +260,19 @@ function AppContent() {
           }}
         >
           <div
-            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
+            className="rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl"
+            style={{
+              backgroundColor: 'var(--color-background)',
+              border: '2px solid var(--color-steel)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
+            <h2 className="font-heading text-2xl md:text-3xl mb-4 uppercase tracking-wide" style={{ color: 'var(--color-primary)' }}>
               {t('setTimer')}
             </h2>
             <div className="flex gap-4 mb-6">
               <div className="flex-1">
-                <label className="block text-sm font-body text-white mb-2">
+                <label className="block text-sm font-body mb-2" style={{ color: 'var(--color-slate)' }}>
                   {t('minutes')}
                 </label>
                 <input
@@ -261,16 +281,23 @@ function AppContent() {
                   max="99"
                   value={customMinutes}
                   onChange={(e) => setCustomMinutes(e.target.value)}
-                  className="w-full px-4 py-3 bg-steelBlue text-electricMint font-mono text-2xl rounded-lg border-2 border-steelBlue focus:border-electricMint focus:outline-none text-center"
+                  className="w-full px-4 py-3 font-mono text-2xl rounded-lg border-2 focus:outline-none text-center"
+                  style={{
+                    backgroundColor: 'var(--color-steel)',
+                    color: 'var(--color-primary)',
+                    borderColor: 'var(--color-steel)'
+                  }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = 'var(--color-primary)'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = 'var(--color-steel)'}
                   placeholder="00"
                   autoFocus
                 />
               </div>
               <div className="flex items-end pb-3">
-                <span className="text-electricMint font-mono text-3xl">:</span>
+                <span className="font-mono text-3xl" style={{ color: 'var(--color-primary)' }}>:</span>
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-body text-white mb-2">
+                <label className="block text-sm font-body mb-2" style={{ color: 'var(--color-slate)' }}>
                   {t('seconds')}
                 </label>
                 <input
@@ -279,7 +306,14 @@ function AppContent() {
                   max="59"
                   value={customSeconds}
                   onChange={(e) => setCustomSeconds(e.target.value)}
-                  className="w-full px-4 py-3 bg-steelBlue text-electricMint font-mono text-2xl rounded-lg border-2 border-steelBlue focus:border-electricMint focus:outline-none text-center"
+                  className="w-full px-4 py-3 font-mono text-2xl rounded-lg border-2 focus:outline-none text-center"
+                  style={{
+                    backgroundColor: 'var(--color-steel)',
+                    color: 'var(--color-primary)',
+                    borderColor: 'var(--color-steel)'
+                  }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = 'var(--color-primary)'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = 'var(--color-steel)'}
                   placeholder="00"
                 />
               </div>
@@ -291,13 +325,25 @@ function AppContent() {
                   setCustomMinutes('');
                   setCustomSeconds('');
                 }}
-                className="flex-1 px-6 py-3 bg-steelBlue hover:bg-steelBlue/80 text-white font-body font-semibold rounded-lg transition-all button-press"
+                className="flex-1 px-6 py-3 font-body font-semibold rounded-lg transition-all button-press"
+                style={{
+                  backgroundColor: 'var(--color-steel)',
+                  color: 'var(--color-slate)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 {t('cancel')}
               </button>
               <button
                 onClick={handleSetTime}
-                className="flex-1 px-6 py-3 bg-electricMint hover:bg-electricMint/80 text-broadcastNavy font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+                className="flex-1 px-6 py-3 font-body font-semibold rounded-lg transition-all button-press shadow-lg"
+                style={{
+                  backgroundColor: 'var(--color-primary)',
+                  color: 'var(--color-background)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 {t('setTime')}
               </button>
@@ -313,10 +359,14 @@ function AppContent() {
           onClick={() => setShowLanguageModal(false)}
         >
           <div
-            className="bg-broadcastNavy rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl border-2 border-steelBlue"
+            className="rounded-2xl p-6 md:p-8 max-w-md w-full modal-animate shadow-2xl"
+            style={{
+              backgroundColor: 'var(--color-background)',
+              border: '2px solid var(--color-steel)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-heading text-3xl text-electricMint mb-4 uppercase tracking-wide">
+            <h2 className="font-heading text-2xl md:text-3xl mb-4 uppercase tracking-wide" style={{ color: 'var(--color-primary)' }}>
               {t('selectLanguage')}
             </h2>
 
@@ -325,11 +375,20 @@ function AppContent() {
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageSelect(lang.code)}
-                  className={`w-full px-6 py-4 font-body transition-colors text-left flex items-center gap-4 rounded-lg ${
-                    lang.code === language
-                      ? 'bg-electricMint text-broadcastNavy font-semibold'
-                      : 'bg-steelBlue text-white hover:bg-steelBlue/80'
-                  }`}
+                  className="w-full px-6 py-4 font-body transition-colors text-left flex items-center gap-4 rounded-lg"
+                  style={{
+                    backgroundColor: lang.code === language ? 'var(--color-primary)' : 'var(--color-steel)',
+                    color: lang.code === language ? 'var(--color-background)' : 'var(--color-slate)',
+                    fontWeight: lang.code === language ? '600' : '400'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (lang.code !== language) {
+                      e.currentTarget.style.opacity = '0.8';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                  }}
                 >
                   <span className={`fi fi-${lang.flagCode} text-2xl`}></span>
                   <span className="text-lg">{lang.name}</span>

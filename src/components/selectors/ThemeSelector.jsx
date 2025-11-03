@@ -63,68 +63,86 @@ const ThemeSelector = ({ isMobile = false }) => {
       {/* Modal Overlay - Rendered via Portal to avoid transform issues */}
       {isOpen && createPortal(
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
           onClick={() => setIsOpen(false)}
         >
           {/* Modal Content */}
           <div
-            className="bg-steelBlue rounded-xl shadow-2xl border-2 border-electricMint/30 w-full max-w-md animate-in fade-in zoom-in duration-200"
+            className="rounded-2xl shadow-2xl w-full max-w-md modal-animate"
+            style={{
+              backgroundColor: 'var(--color-background)',
+              border: '2px solid var(--color-steel)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-electricMint/20">
+            <div className="flex items-center justify-between p-4 md:p-6" style={{ borderBottom: '1px solid var(--color-steel)' }}>
               <div className="flex items-center gap-3">
-                <Palette className="w-6 h-6 text-electricMint" />
-                <h3 className="font-heading text-xl text-electricMint uppercase tracking-wider">
+                <Palette className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
+                <h3 className="font-heading text-2xl md:text-3xl uppercase tracking-wide" style={{ color: 'var(--color-primary)' }}>
                   {t('customize')}
                 </h3>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-electricMint/20 rounded-lg transition-colors"
+                className="p-1 rounded-lg transition-colors"
+                style={{ color: 'var(--color-slate)' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(var(--color-primary-rgb), 0.2)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 title="Close"
               >
-                <X className="w-5 h-5 text-white" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-electricMint/20">
+            <div className="flex" style={{ borderBottom: '1px solid var(--color-steel)' }}>
               <button
                 onClick={() => setActiveTab('theme')}
-                className={`flex-1 px-4 py-3 font-body font-semibold transition-all ${
-                  activeTab === 'theme'
-                    ? 'text-electricMint border-b-2 border-electricMint'
-                    : 'text-white/60 hover:text-white'
-                }`}
+                className="flex-1 px-4 py-3 font-body font-semibold transition-all"
+                style={{
+                  color: activeTab === 'theme' ? 'var(--color-primary)' : 'var(--color-slate)',
+                  borderBottom: activeTab === 'theme' ? '2px solid var(--color-primary)' : 'none'
+                }}
               >
                 {t('colorTheme')}
               </button>
               <button
                 onClick={() => setActiveTab('background')}
-                className={`flex-1 px-4 py-3 font-body font-semibold transition-all ${
-                  activeTab === 'background'
-                    ? 'text-electricMint border-b-2 border-electricMint'
-                    : 'text-white/60 hover:text-white'
-                }`}
+                className="flex-1 px-4 py-3 font-body font-semibold transition-all"
+                style={{
+                  color: activeTab === 'background' ? 'var(--color-primary)' : 'var(--color-slate)',
+                  borderBottom: activeTab === 'background' ? '2px solid var(--color-primary)' : 'none'
+                }}
               >
                 {t('background')}
               </button>
             </div>
 
             {/* Content */}
-            <div className="p-5">
+            <div className="p-5 md:p-6">
               {activeTab === 'theme' && (
                 <div className="grid grid-cols-2 gap-3">
                   {themeList.map((theme) => (
                     <button
                       key={theme.key}
                       onClick={() => handleThemeSelect(theme.key)}
-                      className={`relative p-4 rounded-lg transition-all ${
-                        theme.key === currentTheme
-                          ? 'bg-electricMint/20 border-2 border-electricMint shadow-lg shadow-electricMint/20'
-                          : 'bg-broadcastNavy/50 border-2 border-transparent hover:border-electricMint/50 hover:shadow-md'
-                      }`}
+                      className="relative p-4 rounded-lg transition-all"
+                      style={{
+                        backgroundColor: theme.key === currentTheme ? 'rgba(var(--color-primary-rgb), 0.2)' : 'var(--color-steel)',
+                        border: theme.key === currentTheme ? '2px solid var(--color-primary)' : '2px solid transparent',
+                        boxShadow: theme.key === currentTheme ? '0 0 15px rgba(var(--color-primary-rgb), 0.2)' : 'none'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (theme.key !== currentTheme) {
+                          e.currentTarget.style.borderColor = 'rgba(var(--color-primary-rgb), 0.5)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (theme.key !== currentTheme) {
+                          e.currentTarget.style.borderColor = 'transparent';
+                        }
+                      }}
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <div
@@ -136,12 +154,12 @@ const ThemeSelector = ({ isMobile = false }) => {
                           style={{ backgroundColor: theme.colors.teamB }}
                         ></div>
                       </div>
-                      <div className="text-sm font-body font-semibold text-white text-left">
+                      <div className="text-sm font-body font-semibold text-left" style={{ color: 'var(--color-slate)' }}>
                         {theme.name}
                       </div>
                       {theme.key === currentTheme && (
-                        <div className="absolute top-2 right-2 bg-electricMint rounded-full p-0.5">
-                          <Check className="w-3 h-3 text-broadcastNavy" />
+                        <div className="absolute top-2 right-2 rounded-full p-0.5" style={{ backgroundColor: 'var(--color-primary)' }}>
+                          <Check className="w-3 h-3" style={{ color: 'var(--color-background)' }} />
                         </div>
                       )}
                     </button>
@@ -157,21 +175,32 @@ const ThemeSelector = ({ isMobile = false }) => {
                       <button
                         key={style.key}
                         onClick={() => handleBackgroundStyleSelect(style.key)}
-                        className={`relative p-4 rounded-lg transition-all ${
-                          style.key === backgroundStyle
-                            ? 'bg-electricMint/20 border-2 border-electricMint shadow-lg shadow-electricMint/20'
-                            : 'bg-broadcastNavy/50 border-2 border-transparent hover:border-electricMint/50 hover:shadow-md'
-                        }`}
+                        className="relative p-4 rounded-lg transition-all"
+                        style={{
+                          backgroundColor: style.key === backgroundStyle ? 'rgba(var(--color-primary-rgb), 0.2)' : 'var(--color-steel)',
+                          border: style.key === backgroundStyle ? '2px solid var(--color-primary)' : '2px solid transparent',
+                          boxShadow: style.key === backgroundStyle ? '0 0 15px rgba(var(--color-primary-rgb), 0.2)' : 'none'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (style.key !== backgroundStyle) {
+                            e.currentTarget.style.borderColor = 'rgba(var(--color-primary-rgb), 0.5)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (style.key !== backgroundStyle) {
+                            e.currentTarget.style.borderColor = 'transparent';
+                          }
+                        }}
                       >
                         <div className="flex items-center justify-center mb-2">
-                          <Icon className="w-8 h-8 text-white" />
+                          <Icon className="w-8 h-8" style={{ color: 'var(--color-slate)' }} />
                         </div>
-                        <div className="text-sm font-body font-semibold text-white text-center">
+                        <div className="text-sm font-body font-semibold text-center" style={{ color: 'var(--color-slate)' }}>
                           {t(style.translationKey)}
                         </div>
                         {style.key === backgroundStyle && (
-                          <div className="absolute top-2 right-2 bg-electricMint rounded-full p-0.5">
-                            <Check className="w-3 h-3 text-broadcastNavy" />
+                          <div className="absolute top-2 right-2 rounded-full p-0.5" style={{ backgroundColor: 'var(--color-primary)' }}>
+                            <Check className="w-3 h-3" style={{ color: 'var(--color-background)' }} />
                           </div>
                         )}
                       </button>
