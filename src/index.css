@@ -10,15 +10,16 @@
 }
 
 :root {
-  --color-background: #0A1628;
-  --color-primary: #00FF87;
-  --color-primary-hover: #00E67A;
-  --color-primary-active: #00CC6D;
-  --color-secondary: #FF2D55;
-  --color-steel: #2A3F5F;
-  --color-slate: #8B9DC3;
-  --color-team-a: #00FF87;
-  --color-team-b: #FF2D55;
+  /* Default to Dark theme variables to avoid initial classic flash */
+  --color-background: #0D0D0D;
+  --color-primary: #FFFFFF;
+  --color-primary-hover: #E6E6E6;
+  --color-primary-active: #CCCCCC;
+  --color-secondary: #666666;
+  --color-steel: #1A1A1A;
+  --color-slate: #999999;
+  --color-team-a: #FFFFFF;
+  --color-team-b: #666666;
 }
 
 body {
